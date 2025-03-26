@@ -1,18 +1,19 @@
 package DTOS;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class LibroDTO {
     private String titulo;
     private String autor;
     private String isbn;
-    private LocalDate fechaLanzamiento;
+    private Date fechaLanzamiento;
     private String categoria;
     private double precio;
     private int cantidad;
+    private String rutaImagen;
 
-    // Constructor
-    public LibroDTO(String titulo, String autor, String isbn, LocalDate fechaLanzamiento, String categoria, double precio, int cantidad) {
+    public LibroDTO(String titulo, String autor, String isbn, Date fechaLanzamiento, String categoria, double precio, int cantidad, String rutaImagen) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -20,6 +21,7 @@ public class LibroDTO {
         this.categoria = categoria;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.rutaImagen = rutaImagen;
     }
 
     // Getters y Setters
@@ -47,11 +49,11 @@ public class LibroDTO {
         this.isbn = isbn;
     }
 
-    public LocalDate getFechaLanzamiento() {
+    public Date getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(LocalDate fechaLanzamiento) {
+    public void setFechaLanzamiento(Date fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 
@@ -77,6 +79,19 @@ public class LibroDTO {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+
+    public String getFechaLanzamientoFormateada(String formato) {
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+        return sdf.format(fechaLanzamiento);
     }
 
     @Override

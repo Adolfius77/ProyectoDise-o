@@ -1,32 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Presentacion;
 
 import DTOS.LibroDTO;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-/**
- *
- * @author riosr
- */
 public class GUICategorias extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUICategoriaFantasia
-     * @param librosDisponibles
-     */
-    public GUICategorias(List<LibroDTO> librosDisponibles) {
+    private List<LibroDTO> librosDisponibles;
+    private List<LibroDTO> carrito = new ArrayList<>();
+
+    public GUICategorias() {
         initComponents();
         setLocationRelativeTo(null);
-        for (LibroDTO libro : librosDisponibles) {
-           PanelLibro panelito = new PanelLibro(libro);
-           this.PanelDinamico.add(panelito);
-        }
+        librosDisponibles = obtenerLibros();
+        mostrarLibrosPorCategoria("FANTASIA");
     }
 
-    
+    private List<LibroDTO> obtenerLibros() {
+        List<LibroDTO> libros = new ArrayList<>();
+        Date fecha1 = new GregorianCalendar(2023, 10, 15).getTime();
+        Date fecha2 = new GregorianCalendar(2022, 5, 20).getTime();
+        Date fecha3 = new GregorianCalendar(2021, 2, 10).getTime();
+        Date fecha4 = new GregorianCalendar(2020, 9, 5).getTime();
+        Date fecha5 = new GregorianCalendar(2019, 12, 1).getTime();
+        Date fecha6 = new GregorianCalendar(2018, 7, 25).getTime();
+        Date fecha7 = new GregorianCalendar(2017, 4, 12).getTime();
+        Date fecha8 = new GregorianCalendar(2016, 11, 30).getTime();
+
+        libros.add(new LibroDTO("Las pruebas del sol", "pepe", "ISBN 1", fecha1, "FANTASIA", 389.00, 47, "/img/LasPruebasDelSol1.jpg"));
+        
+        return libros;
+    }
+    private void mostrarLibrosPorCategoria(String categoria) {
+        PanelDinamico.removeAll();
+        List<LibroDTO> librosFiltrados = filtrarLibrosPorCategoria(categoria);
+        for (LibroDTO libro : librosFiltrados) {
+            PanelLibro panelito = new PanelLibro(libro, carrito);
+            PanelDinamico.add(panelito);
+        }
+        PanelDinamico.revalidate();
+        PanelDinamico.repaint();
+        jLabel1.setText(categoria);
+    }
+    private List<LibroDTO> filtrarLibrosPorCategoria(String categoria) {
+        List<LibroDTO> librosFiltrados = new ArrayList<>();
+        for (LibroDTO libro : librosDisponibles) {
+            if (libro.getCategoria().equalsIgnoreCase(categoria)) {
+                librosFiltrados.add(libro);
+            }
+        }
+        return librosFiltrados;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,25 +267,8 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-//        String seleccion = (String) CMBCategorias.getSelectedItem();
-//        if ("COCINA".equals(seleccion)) {
-//            GUICategoriaCocina ventanaCocina = new GUICategoriaCocina();  
-//            ventanaCocina.setVisible(true);
-//            this.dispose();
-//
-//        } else if ("EDUCACION".equals(seleccion)) {
-//            GUICategoriaEducacion ventanaEducacion = new GUICategoriaEducacion();
-//            ventanaEducacion.setVisible(true);
-//            this.dispose();
-//        }else if("TERROR".equals(seleccion)){
-//            GUICategoriaTerror ventanaTerror = new GUICategoriaTerror();
-//            ventanaTerror.setVisible(true);
-//            this.dispose();
-//        }else if("FANTASIA".equals(seleccion)){
-//            GUICategoriaFantasia VentanaFantasia = new GUICategoriaFantasia();
-//            VentanaFantasia.setVisible(true);
-//            this.dispose();
-//        }
+String seleccion = (String) CMBCategorias.getSelectedItem();
+        mostrarLibrosPorCategoria(seleccion);
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
@@ -310,7 +319,7 @@ public class GUICategorias extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-//                new GUICategorias().setVisible(true);
+                new GUICategorias().setVisible(true);
             }
         });
     }

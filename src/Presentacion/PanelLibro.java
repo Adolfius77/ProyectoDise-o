@@ -4,7 +4,11 @@
  */
 package Presentacion;
 import  DTOS.LibroDTO;
-
+import javax.swing.ImageIcon;
+import java.util.List;
+import javax.swing.ImageIcon;
+import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author adoil
@@ -15,11 +19,32 @@ public class PanelLibro extends javax.swing.JPanel {
      * Creates new form PanelLibro
      * @param libro
      */
-    public PanelLibro(LibroDTO libro) {
+    private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public PanelLibro(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
         this.LblNombreLibro.setText(libro.getTitulo());
         this.LblPrecio.setText(String.format("%.2f", libro.getPrecio()));
-        this.LblDisponibildiad.setText(String.format("%.2f", libro.getCantidad()));
+        this.LblDisponibildiad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
+    }
+
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                LblImagenSol.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                LblImagenSol.setText("Imagen no encontrada"); 
+            }
+        } else {
+            LblImagenSol.setText("Sin imagen"); 
+        }
     }
 
     /**
@@ -31,21 +56,21 @@ public class PanelLibro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel15 = new javax.swing.JPanel();
+        PanelLasPruebasDelSol = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
+        LblImagenSol = new javax.swing.JLabel();
         LblNombreLibro = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         LblPrecio = new javax.swing.JLabel();
         LblDisponibildiad = new javax.swing.JLabel();
         BtnAgregarCarrito = new javax.swing.JButton();
 
-        jPanel15.setBackground(new java.awt.Color(217, 202, 218));
-        jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 196, 208), 2));
+        PanelLasPruebasDelSol.setBackground(new java.awt.Color(217, 202, 218));
+        PanelLasPruebasDelSol.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(202, 196, 208), 2));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
+        LblImagenSol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LasPruebasDelSol1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -53,14 +78,14 @@ public class PanelLibro extends javax.swing.JPanel {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap(132, Short.MAX_VALUE)
-                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblImagenSol, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(LblImagenSol, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -106,29 +131,29 @@ public class PanelLibro extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelLasPruebasDelSolLayout = new javax.swing.GroupLayout(PanelLasPruebasDelSol);
+        PanelLasPruebasDelSol.setLayout(PanelLasPruebasDelSolLayout);
+        PanelLasPruebasDelSolLayout.setHorizontalGroup(
+            PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
+                .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(BtnAgregarCarrito))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
+                    .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        PanelLasPruebasDelSolLayout.setVerticalGroup(
+            PanelLasPruebasDelSolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLasPruebasDelSolLayout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -150,7 +175,7 @@ public class PanelLibro extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelLasPruebasDelSol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -159,24 +184,25 @@ public class PanelLibro extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelLasPruebasDelSol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarCarritoActionPerformed
-        // TODO add your handling code here:
+        carrito.add(libro);
+        JOptionPane.showMessageDialog(this, libro.getTitulo() + " agregado al carrito.");
     }//GEN-LAST:event_BtnAgregarCarritoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregarCarrito;
     private javax.swing.JLabel LblDisponibildiad;
+    private javax.swing.JLabel LblImagenSol;
     private javax.swing.JLabel LblNombreLibro;
     private javax.swing.JLabel LblPrecio;
-    private javax.swing.JLabel jLabel23;
+    private javax.swing.JPanel PanelLasPruebasDelSol;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel24;
     // End of variables declaration//GEN-END:variables
 }
