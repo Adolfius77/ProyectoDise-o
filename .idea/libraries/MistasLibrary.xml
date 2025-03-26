@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MistasLibrary">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/MistasLibrary.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
