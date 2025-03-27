@@ -55,13 +55,12 @@ public class GUIINICIO extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        CMBCategorias = new javax.swing.JComboBox<>();
         BtnPerfil = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        btnCategorias = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -365,18 +364,6 @@ public class GUIINICIO extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CATEGORIAS");
-
-        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "EDUCACION" }));
-        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CMBCategoriasActionPerformed(evt);
-            }
-        });
-
         BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
         BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
         BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -407,6 +394,14 @@ public class GUIINICIO extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOG.png"))); // NOI18N
 
+        btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        btnCategorias.setText("CATEGORIAS");
+        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -414,11 +409,9 @@ public class GUIINICIO extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(BtnInicio)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(46, 46, 46)
+                .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,13 +426,14 @@ public class GUIINICIO extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnInicio)
@@ -449,9 +443,6 @@ public class GUIINICIO extends javax.swing.JFrame {
                                 .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(BtnPerfil)))
                         .addGap(19, 19, 19))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(217, 202, 218));
@@ -832,28 +823,6 @@ public class GUIINICIO extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
-    private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-//        String seleccion = (String) CMBCategorias.getSelectedItem();
-//        if ("COCINA".equals(seleccion)) {
-//            GUICategoriaCocina ventanaCocina = new GUICategoriaCocina();  
-//            ventanaCocina.setVisible(true);
-//            this.dispose();
-//
-//        } else if ("EDUCACION".equals(seleccion)) {
-//            GUICategoriaEducacion ventanaEducacion = new GUICategoriaEducacion();
-//            ventanaEducacion.setVisible(true);
-//            this.dispose();
-//        }else if("TERROR".equals(seleccion)){
-//            GUICategoriaTerror ventanaTerror = new GUICategoriaTerror();
-//            ventanaTerror.setVisible(true);
-//            this.dispose();
-//        }else if("FANTASIA".equals(seleccion)){
-//            GUICategoriaFantasia VentanaFantasia = new GUICategoriaFantasia();
-//            VentanaFantasia.setVisible(true);
-//            this.dispose();
-//        }
-    }//GEN-LAST:event_CMBCategoriasActionPerformed
-
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
         GUICarrito carrito = new GUICarrito();
         carrito.setVisible(true);
@@ -869,6 +838,12 @@ public class GUIINICIO extends javax.swing.JFrame {
         perfil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        GUICategorias categorias = new GUICategorias();
+        categorias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -909,12 +884,12 @@ public class GUIINICIO extends javax.swing.JFrame {
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnPerfil;
-    private javax.swing.JComboBox<String> CMBCategorias;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JLabel ImgBalatro;
     private javax.swing.JLabel ImgHarryPotter;
     private javax.swing.JLabel ImgPou;
     private javax.swing.JTextArea TxtBusqueda;
+    private javax.swing.JButton btnCategorias;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
@@ -943,7 +918,6 @@ public class GUIINICIO extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

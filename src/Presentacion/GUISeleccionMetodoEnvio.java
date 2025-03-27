@@ -30,13 +30,12 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        CMBCategorias = new javax.swing.JComboBox<>();
         BtnPerfil = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        btnCategorias = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -59,18 +58,6 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
         BtnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnInicioActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CATEGORIAS");
-
-        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "EDUCACION" }));
-        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CMBCategoriasActionPerformed(evt);
             }
         });
 
@@ -104,6 +91,14 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOG.png"))); // NOI18N
 
+        btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        btnCategorias.setText("CATEGORIAS");
+        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -111,11 +106,9 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(BtnInicio)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(71, 71, 71)
+                .addComponent(btnCategorias)
+                .addGap(164, 164, 164)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,18 +118,19 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnInicio)
@@ -146,9 +140,6 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
                                 .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(BtnPerfil)))
                         .addGap(19, 19, 19))))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(217, 202, 218));
@@ -183,9 +174,9 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(checkBoxEstafeta))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkBoxEstafeta)
+                    .addComponent(jLabel2))
                 .addGap(10, 10, 10))
         );
 
@@ -330,28 +321,6 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnInicioActionPerformed
 
-    private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        //        String seleccion = (String) CMBCategorias.getSelectedItem();
-        //        if ("COCINA".equals(seleccion)) {
-            //            GUICategoriaCocina ventanaCocina = new GUICategoriaCocina();
-            //            ventanaCocina.setVisible(true);
-            //            this.dispose();
-            //
-            //        } else if ("EDUCACION".equals(seleccion)) {
-            //            GUICategoriaEducacion ventanaEducacion = new GUICategoriaEducacion();
-            //            ventanaEducacion.setVisible(true);
-            //            this.dispose();
-            //        }else if("TERROR".equals(seleccion)){
-            //            GUICategoriaTerror ventanaTerror = new GUICategoriaTerror();
-            //            ventanaTerror.setVisible(true);
-            //            this.dispose();
-            //        }else if("FANTASIA".equals(seleccion)){
-            //            GUICategoriaFantasia VentanaFantasia = new GUICategoriaFantasia();
-            //            VentanaFantasia.setVisible(true);
-            //            this.dispose();
-            //        }
-    }//GEN-LAST:event_CMBCategoriasActionPerformed
-
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
         GUIPerfil perfil = new GUIPerfil();
         perfil.setVisible(true);
@@ -389,6 +358,12 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     private void checkBoxDHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxDHLActionPerformed
 
     }//GEN-LAST:event_checkBoxDHLActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+       GUICategorias categorias = new GUICategorias();
+        categorias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,8 +404,8 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnPerfil;
-    private javax.swing.JComboBox<String> CMBCategorias;
     private javax.swing.JComboBox<String> CMBOpciones;
+    private javax.swing.JButton btnCategorias;
     private javax.swing.JCheckBox checkBoxDHL;
     private javax.swing.JCheckBox checkBoxEstafeta;
     private javax.swing.JLabel jLabel1;
@@ -439,7 +414,6 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;

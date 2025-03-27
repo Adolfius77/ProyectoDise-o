@@ -32,13 +32,12 @@ public class GUICarrito extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
-        CMBCategorias = new javax.swing.JComboBox<>();
         BtnPerfil = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        btnCategorias = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,14 +78,6 @@ public class GUICarrito extends javax.swing.JFrame {
             }
         });
 
-        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "EDUCACION" }));
-        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CMBCategoriasActionPerformed(evt);
-            }
-        });
-
         BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
         BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
         BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -117,9 +108,13 @@ public class GUICarrito extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOG.png"))); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 0, 25)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("CATEGORIAS");
+        btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        btnCategorias.setText("CATEGORIAS");
+        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,11 +123,9 @@ public class GUICarrito extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(BtnInicio)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(47, 47, 47)
+                .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(136, 136, 136)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(BtnPerfil)
@@ -156,13 +149,9 @@ public class GUICarrito extends javax.swing.JFrame {
                                 .addComponent(jLabel21)
                                 .addComponent(BtnCarrito)
                                 .addComponent(CMBOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BtnPerfil)))
+                                .addComponent(BtnPerfil))
+                            .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(32, 32, 32))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -436,20 +425,6 @@ public class GUICarrito extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
-    private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        String seleccion = (String) CMBCategorias.getSelectedItem();
-        if ("COCINA".equals(seleccion)) {
-            GUICategoriaCocina ventanaCocina = new GUICategoriaCocina();  
-            ventanaCocina.setVisible(true);
-            this.dispose();
-
-        } else if ("EDUCACION".equals(seleccion)) {
-            GUICategoriaEducacion ventanaEducacion = new GUICategoriaEducacion();
-            ventanaEducacion.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_CMBCategoriasActionPerformed
-
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
         GUICarrito carrito = new GUICarrito();
         carrito.setVisible(true);
@@ -475,6 +450,12 @@ public class GUICarrito extends javax.swing.JFrame {
         perfil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        GUICategorias categorias = new GUICategorias();
+        categorias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,15 +497,14 @@ public class GUICarrito extends javax.swing.JFrame {
     private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnPagar;
     private javax.swing.JButton BtnPerfil;
-    private javax.swing.JComboBox<String> CMBCategorias;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JTextField TxtTotalPagar;
+    private javax.swing.JButton btnCategorias;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

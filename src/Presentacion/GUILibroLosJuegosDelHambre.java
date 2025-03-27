@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,10 +17,32 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
     /**
      * Creates new form GUILosJuegosDelHambre
      */
-    public GUILibroLosJuegosDelHambre() {
+    private LibroDTO libro;
+    private List<LibroDTO> carrito;
+    
+    public GUILibroLosJuegosDelHambre(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblLosJuegosDelHambreNombre.setText(libro.getTitulo());
+        this.lblLosJuegosDelHambrePrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.LblDisponibildiad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
     }
-
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblLosJuegosDelHambreImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblLosJuegosDelHambreImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblLosJuegosDelHambreImg.setText("Sin imagen"); 
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +58,7 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
         lblLosJuegosDelHambreNombre = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
         lblLosJuegosDelHambrePrecio = new javax.swing.JLabel();
-        lblLosJuegosDelHambreDisponibilidad = new javax.swing.JLabel();
+        LblDisponibildiad = new javax.swing.JLabel();
         btnLosJuegosDelHambreAgregar = new javax.swing.JButton();
 
         jPanel15.setBackground(new java.awt.Color(217, 202, 218));
@@ -88,8 +114,8 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        lblLosJuegosDelHambreDisponibilidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblLosJuegosDelHambreDisponibilidad.setText("35 disponibles");
+        LblDisponibildiad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblDisponibildiad.setText("35 disponibles");
 
         btnLosJuegosDelHambreAgregar.setBackground(new java.awt.Color(101, 85, 143));
         btnLosJuegosDelHambreAgregar.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
@@ -110,7 +136,7 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLosJuegosDelHambreDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLosJuegosDelHambreNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel15Layout.createSequentialGroup()
@@ -131,7 +157,7 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblLosJuegosDelHambreDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLosJuegosDelHambreAgregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -165,11 +191,11 @@ public class GUILibroLosJuegosDelHambre extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblDisponibildiad;
     private javax.swing.JButton btnLosJuegosDelHambreAgregar;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JLabel lblLosJuegosDelHambreDisponibilidad;
     private javax.swing.JLabel lblLosJuegosDelHambreImg;
     private javax.swing.JLabel lblLosJuegosDelHambreNombre;
     private javax.swing.JLabel lblLosJuegosDelHambrePrecio;

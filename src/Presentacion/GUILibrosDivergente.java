@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,10 +17,38 @@ public class GUILibrosDivergente extends javax.swing.JPanel {
     /**
      * Creates new form GUIDivergente
      */
-    public GUILibrosDivergente() {
+   private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibrosDivergente(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblDivergenteNombre.setText(libro.getTitulo());
+        this.lblDivergentePrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.lblDivergenteDisponibilidad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
     }
 
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblDivergenteImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblDivergenteImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblDivergenteImg.setText("Sin imagen"); 
+        }
+    }
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

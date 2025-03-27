@@ -4,17 +4,42 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
  */
 public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
 
-    /**
-     * Creates new form GUILibroSplatoonArtbook
-     */
-    public GUILibroSplatoonArtbook() {
+    private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibroSplatoonArtbook(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.LblNombreLibro.setText(libro.getTitulo());
+        this.LblPrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.LblDisponibildiad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
+    }
+
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblSplatoonArtbookImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblSplatoonArtbookImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblSplatoonArtbookImg.setText("Sin imagen"); 
+        }
     }
 
     /**
@@ -29,10 +54,10 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
         jPanel15 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         lblSplatoonArtbookImg = new javax.swing.JLabel();
-        lblSplatoonArtbookNombre = new javax.swing.JLabel();
+        LblNombreLibro = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
-        lblSplatoonArtbookPrecio = new javax.swing.JLabel();
-        lblSplatoonArtbookDisponibilidad = new javax.swing.JLabel();
+        LblPrecio = new javax.swing.JLabel();
+        LblDisponibildiad = new javax.swing.JLabel();
         btnSplatoonArtbookAgregar = new javax.swing.JButton();
 
         jPanel15.setBackground(new java.awt.Color(217, 202, 218));
@@ -59,13 +84,13 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        lblSplatoonArtbookNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblSplatoonArtbookNombre.setText("Splatoon Artbook");
+        LblNombreLibro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblNombreLibro.setText("Splatoon Artbook");
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblSplatoonArtbookPrecio.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblSplatoonArtbookPrecio.setText("$768");
+        LblPrecio.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblPrecio.setText("$768");
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -75,7 +100,7 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
             .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel24Layout.createSequentialGroup()
                     .addGap(0, 11, Short.MAX_VALUE)
-                    .addComponent(lblSplatoonArtbookPrecio)
+                    .addComponent(LblPrecio)
                     .addGap(0, 12, Short.MAX_VALUE)))
         );
         jPanel24Layout.setVerticalGroup(
@@ -84,12 +109,12 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
             .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel24Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblSplatoonArtbookPrecio)
+                    .addComponent(LblPrecio)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        lblSplatoonArtbookDisponibilidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblSplatoonArtbookDisponibilidad.setText("25 disponibles");
+        LblDisponibildiad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LblDisponibildiad.setText("25 disponibles");
 
         btnSplatoonArtbookAgregar.setBackground(new java.awt.Color(101, 85, 143));
         btnSplatoonArtbookAgregar.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
@@ -110,8 +135,8 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSplatoonArtbookDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSplatoonArtbookNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
@@ -127,11 +152,11 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
                 .addGap(71, 71, 71)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSplatoonArtbookNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblNombreLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSplatoonArtbookDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LblDisponibildiad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSplatoonArtbookAgregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -165,13 +190,13 @@ public class GUILibroSplatoonArtbook extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblDisponibildiad;
+    private javax.swing.JLabel LblNombreLibro;
+    private javax.swing.JLabel LblPrecio;
     private javax.swing.JButton btnSplatoonArtbookAgregar;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JLabel lblSplatoonArtbookDisponibilidad;
     private javax.swing.JLabel lblSplatoonArtbookImg;
-    private javax.swing.JLabel lblSplatoonArtbookNombre;
-    private javax.swing.JLabel lblSplatoonArtbookPrecio;
     // End of variables declaration//GEN-END:variables
 }

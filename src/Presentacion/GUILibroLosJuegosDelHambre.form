@@ -62,7 +62,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblLosJuegosDelHambreDisponibilidad" alignment="0" min="-2" pref="404" max="-2" attributes="0"/>
+                              <Component id="LblDisponibildiad" alignment="0" min="-2" pref="404" max="-2" attributes="0"/>
                               <Component id="lblLosJuegosDelHambreNombre" alignment="0" min="-2" pref="404" max="-2" attributes="0"/>
                               <Component id="jPanel14" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -90,7 +90,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblLosJuegosDelHambreDisponibilidad" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="LblDisponibildiad" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnLosJuegosDelHambreAgregar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -188,7 +188,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblLosJuegosDelHambreDisponibilidad">
+        <Component class="javax.swing.JLabel" name="LblDisponibildiad">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>

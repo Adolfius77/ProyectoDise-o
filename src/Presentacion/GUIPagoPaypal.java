@@ -45,12 +45,11 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         BtnInicio = new javax.swing.JButton();
         BtnCarrito = new javax.swing.JButton();
-        CMBCategorias = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         BtnPerfil1 = new javax.swing.JButton();
+        btnCategorias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,19 +134,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
             }
         });
 
-        CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "EDUCACION" }));
-        CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CMBCategoriasActionPerformed(evt);
-            }
-        });
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LOG.png"))); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 30)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("CATEGORIAS");
 
         CMBOpciones.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         CMBOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Opciones", "Registrar entrada", "Ver Historial", "Cambiar Contraseña", "Cerrar Sesion" }));
@@ -169,6 +156,14 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
             }
         });
 
+        btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        btnCategorias.setText("CATEGORIAS");
+        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,11 +171,9 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(BtnInicio)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200)
+                .addGap(64, 64, 64)
+                .addComponent(btnCategorias)
+                .addGap(385, 385, 385)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BtnPerfil1)
@@ -200,11 +193,6 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(BtnInicio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(CMBCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnCarrito)
@@ -213,7 +201,10 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                             .addComponent(BtnPerfil1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(btnCategorias)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -300,20 +291,6 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
-    private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-        String seleccion = (String) CMBCategorias.getSelectedItem();
-        if ("COCINA".equals(seleccion)) {
-            GUICategoriaCocina ventanaCocina = new GUICategoriaCocina();
-            ventanaCocina.setVisible(true);
-            this.dispose();
-
-        } else if ("EDUCACION".equals(seleccion)) {
-            GUICategoriaEducacion ventanaEducacion = new GUICategoriaEducacion();
-            ventanaEducacion.setVisible(true);
-            this.dispose();
-        }
-    }//GEN-LAST:event_CMBCategoriasActionPerformed
-
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CMBOpcionesActionPerformed
@@ -333,6 +310,12 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldContraseñaActionPerformed
+
+    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
+        GUICategorias categorias = new GUICategorias();
+        categorias.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,17 +357,16 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnPerfil1;
-    private javax.swing.JComboBox<String> CMBCategorias;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JTextField TxtFldContraseña;
     private javax.swing.JTextField TxtFldCorreo;
+    private javax.swing.JButton btnCategorias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

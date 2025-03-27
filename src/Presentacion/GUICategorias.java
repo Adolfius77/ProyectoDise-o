@@ -16,6 +16,7 @@ public class GUICategorias extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         librosDisponibles = obtenerLibros();
         mostrarLibrosPorCategoria("FANTASIA");
+        
     }
 
     private List<LibroDTO> obtenerLibros() {
@@ -30,9 +31,18 @@ public class GUICategorias extends javax.swing.JFrame {
         Date fecha8 = new GregorianCalendar(2016, 11, 30).getTime();
 
         libros.add(new LibroDTO("Las pruebas del sol", "pepe", "ISBN 1", fecha1, "FANTASIA", 389.00, 47, "/img/LasPruebasDelSol1.jpg"));
+        libros.add(new LibroDTO("Los juegos del hambre", "Adolfo", "ISBN 2", fecha2, "FANTASIA", 379.00, 67, "/img/losJuegosDelHambre1.jpg"));
+        libros.add(new LibroDTO("Harry Potter y la piedra filosofal", "Adolfo", "ISBN 3", fecha3, "FANTASIA", 3229.00, 23, "/img/harryPotter.jpg"));
+        libros.add(new LibroDTO("Splatoon", "Adolfo", "ISBN 3", fecha4, "FANTASIA", 229.00, 23, "/img/SplatoonArtbook1.jpg"));
+        libros.add(new LibroDTO("divergente", "Adolfo", "ISBN 4", fecha5, "FANTASIA", 4229.00, 23, "/img/divergente1.jpg"));
+        libros.add(new LibroDTO("Amigo Imaginario", "Adolfo", "ISBN 5", fecha6, "FANTASIA", 429.00, 2, "/img/amigoImaginario1.jpg"));
+       
         
+       
+
         return libros;
     }
+
     private void mostrarLibrosPorCategoria(String categoria) {
         PanelDinamico.removeAll();
         List<LibroDTO> librosFiltrados = filtrarLibrosPorCategoria(categoria);
@@ -44,6 +54,7 @@ public class GUICategorias extends javax.swing.JFrame {
         PanelDinamico.repaint();
         jLabel1.setText(categoria);
     }
+
     private List<LibroDTO> filtrarLibrosPorCategoria(String categoria) {
         List<LibroDTO> librosFiltrados = new ArrayList<>();
         for (LibroDTO libro : librosDisponibles) {
@@ -98,6 +109,11 @@ public class GUICategorias extends javax.swing.JFrame {
 
         CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "FARMEO" }));
+        CMBCategorias.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CMBCategoriasItemStateChanged(evt);
+            }
+        });
         CMBCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CMBCategoriasActionPerformed(evt);
@@ -206,17 +222,8 @@ public class GUICategorias extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout PanelDinamicoLayout = new javax.swing.GroupLayout(PanelDinamico);
-        PanelDinamico.setLayout(PanelDinamicoLayout);
-        PanelDinamicoLayout.setHorizontalGroup(
-            PanelDinamicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1424, Short.MAX_VALUE)
-        );
-        PanelDinamicoLayout.setVerticalGroup(
-            PanelDinamicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
-        );
-
+        PanelDinamico.setBackground(new java.awt.Color(101, 85, 143));
+        PanelDinamico.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelDesplasamientoLibroFantasia.setViewportView(PanelDinamico);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -228,7 +235,7 @@ public class GUICategorias extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(15, 15, 15)
                         .addComponent(PanelDesplasamientoLibroFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 1426, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -238,9 +245,9 @@ public class GUICategorias extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(PanelDesplasamientoLibroFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelDesplasamientoLibroFantasia, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,10 +258,7 @@ public class GUICategorias extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -267,7 +271,7 @@ public class GUICategorias extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
-String seleccion = (String) CMBCategorias.getSelectedItem();
+        String seleccion = (String) CMBCategorias.getSelectedItem();
         mostrarLibrosPorCategoria(seleccion);
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
@@ -282,10 +286,15 @@ String seleccion = (String) CMBCategorias.getSelectedItem();
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-         GUIPerfil perfil = new GUIPerfil();
+        GUIPerfil perfil = new GUIPerfil();
         perfil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BtnPerfilActionPerformed
+
+    private void CMBCategoriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CMBCategoriasItemStateChanged
+      String seleccion = (String) CMBCategorias.getSelectedItem();
+        mostrarLibrosPorCategoria(seleccion);  
+    }//GEN-LAST:event_CMBCategoriasItemStateChanged
 
     /**
      * @param args the command line arguments
