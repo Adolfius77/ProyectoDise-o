@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,9 +17,35 @@ public class GUILibroLaChicaGris extends javax.swing.JPanel {
     /**
      * Creates new form GUILibroLaChicaGris
      */
-    public GUILibroLaChicaGris() {
+    private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibroLaChicaGris(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblLaChicaGrisNombre.setText(libro.getTitulo());
+        this.lblLaChicaGrisPrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.lblLaChicaGrisDisponibilidad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
     }
+    
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblLaChicaGrisImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblLaChicaGrisImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblLaChicaGrisImg.setText("Sin imagen"); 
+        }
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

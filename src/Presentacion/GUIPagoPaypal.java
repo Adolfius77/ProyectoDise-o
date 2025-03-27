@@ -1,8 +1,7 @@
 package Presentacion;
 
 import Presentacion.GUICarrito;
-import Presentacion.GUICategoriaCocina;
-import Presentacion.GUICategoriaEducacion;
+
 import Presentacion.GUIINICIO;
 import Presentacion.GUIPerfil;
 import javax.swing.JOptionPane;

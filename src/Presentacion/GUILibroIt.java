@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,9 +17,34 @@ public class GUILibroIt extends javax.swing.JPanel {
     /**
      * Creates new form GUILibroIt
      */
-    public GUILibroIt() {
+     private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibroIt(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblITNombre.setText(libro.getTitulo());
+        this.lblITPrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.lblITDisponibilidad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
     }
+    
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblITImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblITImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblITImg.setText("Sin imagen"); 
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,9 +17,34 @@ public class GUILibroLaCasaDeLasSombras extends javax.swing.JPanel {
     /**
      * Creates new form GUILibroLaCasaDeLasSombras
      */
-    public GUILibroLaCasaDeLasSombras() {
+   private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibroLaCasaDeLasSombras(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblLaCasaDeLasSombrasNombre.setText(libro.getTitulo());
+        this.lblLaCasaDeLasSombrasPrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.lblLaCasaDeLasSombrasDisponibilidad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
     }
+    
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblLaCasaDeLasSombrasImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblLaCasaDeLasSombrasImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblLaCasaDeLasSombrasImg.setText("Sin imagen"); 
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

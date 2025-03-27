@@ -4,6 +4,8 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
+
 /**
  *
  * @author USER
@@ -16,9 +18,21 @@ public class GUIINICIO extends javax.swing.JFrame {
     public GUIINICIO() {
        
         initComponents();
+        agregarListeners();
         setLocationRelativeTo(null);
     }
-
+    public void agregarListeners(){
+        Control.ControlNavegacion control = new ControlNavegacion(this);
+        BtnInicio.setActionCommand("INICIO");
+        BtnInicio.addActionListener(control);
+        btnCategorias.setActionCommand("CATEGORIAS");
+        btnCategorias.addActionListener(control);
+        BtnPerfil.setActionCommand("PERFIL");
+        BtnPerfil.addActionListener(control);
+        BtnCarrito.setActionCommand("CARRITO");
+        BtnCarrito.addActionListener(control);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

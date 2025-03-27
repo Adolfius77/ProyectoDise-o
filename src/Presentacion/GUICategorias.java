@@ -16,6 +16,7 @@ public class GUICategorias extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         librosDisponibles = obtenerLibros();
         mostrarLibrosPorCategoria("FANTASIA");
+        mostrarLibrosPorCategoria("TERROR");
         
     }
 
@@ -36,6 +37,30 @@ public class GUICategorias extends javax.swing.JFrame {
         libros.add(new LibroDTO("Splatoon", "Adolfo", "ISBN 3", fecha4, "FANTASIA", 229.00, 23, "/img/SplatoonArtbook1.jpg"));
         libros.add(new LibroDTO("divergente", "Adolfo", "ISBN 4", fecha5, "FANTASIA", 4229.00, 23, "/img/divergente1.jpg"));
         libros.add(new LibroDTO("Amigo Imaginario", "Adolfo", "ISBN 5", fecha6, "FANTASIA", 429.00, 2, "/img/amigoImaginario1.jpg"));
+        //
+        libros.add(new LibroDTO("IT", "Franco", "ISBN 6", fecha1, "TERROR", 439.00, 47, "/img/IT.jpg"));
+        libros.add(new LibroDTO("El resplandor", "Adolfo", "ISBN 7", fecha2, "TERROR", 379.00, 67, "/img/elResplandor1.jpg"));
+        libros.add(new LibroDTO("La chicha de gris", "Adolfo", "ISBN 8", fecha3, "TERROR", 3229.00, 23, "/img/laChicaDeGris1.jpg"));
+        libros.add(new LibroDTO("Casa de las sombras", "Adolfo", "ISBN 9", fecha4, "TERROR", 229.00, 23, "/img/casaSombra.jpg"));
+        libros.add(new LibroDTO("Amigo imaginario", "Adolfo", "ISBN 10", fecha5, "TERROR", 4229.00, 23, "/img/amigoImaginario1.jpg"));
+        libros.add(new LibroDTO("el chico de piel de cerdo", "Adolfo", "ISBN 11", fecha6, "TERROR", 429.00, 2, "/img/ElChicoDeLaPielDeCerdo.jpg"));
+        
+        //Libros Cocina
+        libros.add(new LibroDTO("Stardew Valley Cookbook", "pepe", "ISBN 12", fecha1, "COCINA", 616.00, 4, "/img/StardewCookbook.jpg"));
+        libros.add(new LibroDTO("Oh, my cookie!", "pepe", "ISBN 13", fecha2, "COCINA", 529.00, 12, "/img/ohMyCookie.jpg"));
+        libros.add(new LibroDTO("Con las manos en la masa madre", "pepe", "ISBN 14", fecha3, "COCINA", 569.00, 43, "/img/masaMadre.jpg"));
+        libros.add(new LibroDTO("El gran libro de la reposteria", "pepe", "ISBN 15", fecha4, "COCINA", 616.00, 50, "/img/ElGranLibroDeLaReposteria.jpg"));
+        libros.add(new LibroDTO("Cocinologia: la ciencia de la cocina", "pepe", "ISBN 16", fecha5, "COCINA", 515.00, 37, "/img/cocinologia.jpg"));
+        libros.add(new LibroDTO("La ciencia de la pasteleria", "pepe", "ISBN 17", fecha6, "COCINA", 900.00, 30, "/img/laCienciaDeLaReposteria.jpg"));
+
+        //Libros Educacion
+        libros.add(new LibroDTO("El valor de educar", "pepe", "ISBN 18", fecha1, "EDUCACION", 400.00, 60, "/img/elValorDeEducar.jpg"));
+        libros.add(new LibroDTO("Enseñar a transgredir", "pepe", "ISBN 19", fecha2, "EDUCACION", 179.00, 14, "/img/enseñarTransgredir.jpg"));
+        libros.add(new LibroDTO("Educar en la naturaleza", "pepe", "ISBN 20", fecha3, "EDUCACION", 719.00, 19, "/img/educarNaturaleza.jpg"));
+        libros.add(new LibroDTO("EducaFakes", "pepe", "ISBN 21", fecha4, "EDUCACION", 429.00, 28, "/img/educaFakes.jpg"));
+        libros.add(new LibroDTO("El arte de educar jugando", "pepe", "ISBN 22", fecha5, "EDUCACION", 379.00, 28, "/img/elArteDeEducar.jpg"));
+        libros.add(new LibroDTO("Aprendiendo a aprender", "pepe", "ISBN 23", fecha6, "EDUCACION", 547.00, 4, "/img/aprendiendoAprender.jpg"));
+        
        
         
        
@@ -108,7 +133,7 @@ public class GUICategorias extends javax.swing.JFrame {
         jLabel6.setText("CATEGORIAS");
 
         CMBCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
-        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "ROMANCE", "HISTORIA", "FARMEO" }));
+        CMBCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COCINA", "FANTASIA", "TERROR", "EDUCACION" }));
         CMBCategorias.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CMBCategoriasItemStateChanged(evt);
@@ -273,6 +298,7 @@ public class GUICategorias extends javax.swing.JFrame {
     private void CMBCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBCategoriasActionPerformed
         String seleccion = (String) CMBCategorias.getSelectedItem();
         mostrarLibrosPorCategoria(seleccion);
+        
     }//GEN-LAST:event_CMBCategoriasActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed

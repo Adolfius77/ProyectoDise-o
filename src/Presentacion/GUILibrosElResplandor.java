@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import DTOS.LibroDTO;
+import java.util.List;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author riosr
@@ -13,8 +17,32 @@ public class GUILibrosElResplandor extends javax.swing.JPanel {
     /**
      * Creates new form GUILibrosElResplandor
      */
-    public GUILibrosElResplandor() {
+    private LibroDTO libro;
+    private List<LibroDTO> carrito;
+
+    public GUILibrosElResplandor(LibroDTO libro, List<LibroDTO> carrito) {
         initComponents();
+        this.libro = libro;
+        this.carrito = carrito;
+        this.lblElResplandorNombre.setText(libro.getTitulo());
+        this.lblElResplandorPrecio.setText(String.format("%.2f", libro.getPrecio()));
+        this.lblElResplandorDisponibilidad.setText(String.format("%d disponibles", libro.getCantidad()));
+        cargarImagen(libro.getRutaImagen());
+    }
+    
+    private void cargarImagen(String rutaImagen) {
+        if (rutaImagen != null && !rutaImagen.isEmpty()) {
+            try {
+                ImageIcon imagen = new ImageIcon(getClass().getResource(rutaImagen));
+                lblElResplandorImg.setIcon(imagen);
+            } catch (Exception e) {
+                System.err.println("Error al cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+                lblElResplandorImg.setText("Imagen no encontrada"); 
+            }
+        } else {
+            lblElResplandorImg.setText("Sin imagen"); 
+        }
     }
 
     /**
