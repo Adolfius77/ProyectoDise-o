@@ -7,6 +7,7 @@ package Presentacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -347,7 +348,40 @@ private List<LibroDTO> carrito = new ArrayList<>();
     }//GEN-LAST:event_TxtFldCPActionPerformed
 
     private void btnPedirPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedirPaqueteActionPerformed
-        // TODO add your handling code here:
+        //Validar que no haya campos vacios
+        String calle = TxtFldCalle.getText().trim();
+        String numeroCasa = TxtFldNumeroCasa.getText().trim();
+        String codigoPostal = TxtFldCP.getText().trim();
+        String colonia = TxtFldColonia.getText().trim();
+        String ciudad = TxtFldCiudad.getText().trim();
+        String estado = TxtFldEstado.getText().trim();
+        String pais = TxtFldPais.getText().trim();
+
+        //Validar campos no vacíos
+        if (calle.isEmpty() || numeroCasa.isEmpty() || codigoPostal.isEmpty()|| colonia.isEmpty() || ciudad.isEmpty() || estado.isEmpty() || pais.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos de dirección.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        //Validar que el codigo postal sea de 5 numeros
+        if (!codigoPostal.matches("\\d{5}")) {
+            JOptionPane.showMessageDialog(this, "El código postal debe tener 5 numeros.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Validar num casa que sea un valor numerico
+        try {
+            Integer.parseInt(numeroCasa);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El número de casa debe ser un valor numérico.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //Validar codigo postal que sea un valor numerico
+        try {
+            Integer.parseInt(codigoPostal);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El codigo postal debe ser un valor numérico.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Pedido procesado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnPedirPaqueteActionPerformed
 
     /**

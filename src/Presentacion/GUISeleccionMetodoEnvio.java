@@ -7,13 +7,16 @@ package Presentacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author riosr
  */
 public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
-private List<LibroDTO> carrito = new ArrayList<>();
+
+    private List<LibroDTO> carrito = new ArrayList<>();
+
     /**
      * Creates new form GUISeleccionMetodoEnvio
      */
@@ -342,9 +345,15 @@ private List<LibroDTO> carrito = new ArrayList<>();
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void checkBoxEstafetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBoxEstafetaMouseClicked
-//        GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
-//        estafeta.setVisible(true);
-//        this.dispose();
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "Ha seleccionado Estafeta. ¿Desea continuar?", "Confirmación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
+            estafeta.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_checkBoxEstafetaMouseClicked
 
     private void checkBoxEstafetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEstafetaActionPerformed
@@ -354,9 +363,15 @@ private List<LibroDTO> carrito = new ArrayList<>();
     }//GEN-LAST:event_checkBoxEstafetaActionPerformed
 
     private void checkBoxDHLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBoxDHLMouseClicked
-//        GUIEnvioDHL dhl = new GUIEnvioDHL();
-//        dhl.setVisible(true);
-//        this.dispose();
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "Ha seleccionado DHL. ¿Desea continuar?", "Confirmación",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            GUIEnvioDHL dhl = new GUIEnvioDHL();
+            dhl.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_checkBoxDHLMouseClicked
 
     private void checkBoxDHLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxDHLActionPerformed

@@ -85,35 +85,35 @@ public class GUICategorias extends javax.swing.JFrame {
         Date fecha7 = new GregorianCalendar(2017, 4, 12).getTime();
         Date fecha8 = new GregorianCalendar(2016, 11, 30).getTime();
 
-        libros.add(new LibroDTO("Las pruebas del sol", "pepe", "ISBN 1", fecha1, "FANTASIA", 389.00, 47, "/img/LasPruebasDelSol1.jpg"));
-        libros.add(new LibroDTO("Los juegos del hambre", "Adolfo", "ISBN 2", fecha2, "FANTASIA", 379.00, 67, "/img/losJuegosDelHambre1.jpg"));
-        libros.add(new LibroDTO("Harry Potter y la piedra filosofal", "Adolfo", "ISBN 3", fecha3, "FANTASIA", 3229.00, 23, "/img/harryPotter.jpg"));
-        libros.add(new LibroDTO("Splatoon", "Adolfo", "ISBN 3", fecha4, "FANTASIA", 229.00, 23, "/img/SplatoonArtbook1.jpg"));
-        libros.add(new LibroDTO("divergente", "Adolfo", "ISBN 4", fecha5, "FANTASIA", 4229.00, 23, "/img/divergente1.jpg"));
-        libros.add(new LibroDTO("Amigo Imaginario", "Adolfo", "ISBN 5", fecha6, "FANTASIA", 429.00, 2, "/img/amigoImaginario1.jpg"));
+        libros.add(new LibroDTO("Las pruebas del sol", "Aiden Thomas", "978-6078828463", fecha1, "FANTASIA", 389.00, 47, "/img/LasPruebasDelSol1.jpg"));
+        libros.add(new LibroDTO("Los juegos del hambre", "Suzanne Collins", "978-6074001907", fecha2, "FANTASIA", 379.00, 67, "/img/losJuegosDelHambre1.jpg"));
+        libros.add(new LibroDTO("Harry Potter y la piedra filosofal", "J. K. Rowling", "978-6073193009", fecha3, "FANTASIA", 3229.00, 23, "/img/harryPotter.jpg"));
+        libros.add(new LibroDTO("Splatoon Ikasu Artbook", "FAMITSU", "978-4047336551", fecha4, "FANTASIA", 229.00, 23, "/img/SplatoonArtbook1.jpg"));
+        libros.add(new LibroDTO("Divergente", "Veronica Roth", "978-6074009842", fecha5, "FANTASIA", 4229.00, 23, "/img/divergente1.jpg"));
+        libros.add(new LibroDTO("Amigo Imaginario", "Stephen Chbosky", "978-6070761515", fecha6, "FANTASIA", 429.00, 2, "/img/amigoImaginario1.jpg"));
         //
-        libros.add(new LibroDTO("IT", "Franco", "ISBN 6", fecha1, "TERROR", 439.00, 47, "/img/IT.jpg"));
-        libros.add(new LibroDTO("El resplandor", "Adolfo", "ISBN 7", fecha2, "TERROR", 379.00, 67, "/img/elResplandor1.jpg"));
-        libros.add(new LibroDTO("La chicha de gris", "Adolfo", "ISBN 8", fecha3, "TERROR", 3229.00, 23, "/img/laChicaDeGris1.jpg"));
-        libros.add(new LibroDTO("Casa de las sombras", "Adolfo", "ISBN 9", fecha4, "TERROR", 229.00, 23, "/img/casaSombra.jpg"));
-        libros.add(new LibroDTO("Amigo imaginario", "Adolfo", "ISBN 10", fecha5, "TERROR", 4229.00, 23, "/img/amigoImaginario1.jpg"));
-        libros.add(new LibroDTO("el chico de piel de cerdo", "Adolfo", "ISBN 11", fecha6, "TERROR", 429.00, 2, "/img/ElChicoDeLaPielDeCerdo.jpg"));
+        libros.add(new LibroDTO("IT", "Stephen King", "978-6073105521", fecha1, "TERROR", 439.00, 47, "/img/IT.jpg"));
+        libros.add(new LibroDTO("El resplandor", "Stephen King", "978-6073118392", fecha2, "TERROR", 379.00, 67, "/img/elResplandor1.jpg"));
+        libros.add(new LibroDTO("La chicha de gris", "Antonio Runa", "978-8445014752", fecha3, "TERROR", 3229.00, 23, "/img/laChicaDeGris1.jpg"));
+        libros.add(new LibroDTO("Casa de las sombras", "Adam Nevill", "978-8445014882", fecha4, "TERROR", 229.00, 23, "/img/casaSombra.jpg"));
+        libros.add(new LibroDTO("Amigo imaginario", "Stephen Chbosky", "978-6070761515", fecha5, "TERROR", 4229.00, 23, "/img/amigoImaginario1.jpg"));
+        libros.add(new LibroDTO("El chico de piel de cerdo", "Raiza Revelles", "978-6070772245", fecha6, "TERROR", 429.00, 2, "/img/ElChicoDeLaPielDeCerdo.jpg"));
 
         //Libros Cocina
-        libros.add(new LibroDTO("Stardew Valley Cookbook", "pepe", "ISBN 12", fecha1, "COCINA", 616.00, 4, "/img/StardewCookbook.jpg"));
-        libros.add(new LibroDTO("Oh, my cookie!", "pepe", "ISBN 13", fecha2, "COCINA", 529.00, 12, "/img/ohMyCookie.jpg"));
-        libros.add(new LibroDTO("Con las manos en la masa madre", "pepe", "ISBN 14", fecha3, "COCINA", 569.00, 43, "/img/masaMadre.jpg"));
-        libros.add(new LibroDTO("El gran libro de la reposteria", "pepe", "ISBN 15", fecha4, "COCINA", 616.00, 50, "/img/ElGranLibroDeLaReposteria.jpg"));
-        libros.add(new LibroDTO("Cocinologia: la ciencia de la cocina", "pepe", "ISBN 16", fecha5, "COCINA", 515.00, 37, "/img/cocinologia.jpg"));
-        libros.add(new LibroDTO("La ciencia de la pasteleria", "pepe", "ISBN 17", fecha6, "COCINA", 900.00, 30, "/img/laCienciaDeLaReposteria.jpg"));
+        libros.add(new LibroDTO("Stardew Valley Cookbook", "ConcernedApe", "978-1984862051", fecha1, "COCINA", 616.00, 4, "/img/StardewCookbook.jpg"));
+        libros.add(new LibroDTO("Oh, my cookie!", "Noelia Toré", "978-8410442542", fecha2, "COCINA", 529.00, 12, "/img/ohMyCookie.jpg"));
+        libros.add(new LibroDTO("Con las manos en la masa madre", "Bernardo Flores Alanís", "978-6072134058", fecha3, "COCINA", 569.00, 43, "/img/masaMadre.jpg"));
+        libros.add(new LibroDTO("El gran libro de la reposteria", "Christian Teubner", "978-8424108229", fecha4, "COCINA", 616.00, 50, "/img/ElGranLibroDeLaReposteria.jpg"));
+        libros.add(new LibroDTO("Cocinologia: la ciencia de la cocina", "Stuart Farrimond", "978-1465486844", fecha5, "COCINA", 515.00, 37, "/img/cocinologia.jpg"));
+        libros.add(new LibroDTO("La ciencia de la pasteleria", "Dario Bressanini", "978-8417127077", fecha6, "COCINA", 900.00, 30, "/img/laCienciaDeLaReposteria.jpg"));
 
         //Libros Educacion
-        libros.add(new LibroDTO("El valor de educar", "pepe", "ISBN 18", fecha1, "EDUCACION", 400.00, 60, "/img/elValorDeEducar.jpg"));
-        libros.add(new LibroDTO("Enseñar a transgredir", "pepe", "ISBN 19", fecha2, "EDUCACION", 179.00, 14, "/img/enseñarTransgredir.jpg"));
-        libros.add(new LibroDTO("Educar en la naturaleza", "pepe", "ISBN 20", fecha3, "EDUCACION", 719.00, 19, "/img/educarNaturaleza.jpg"));
-        libros.add(new LibroDTO("EducaFakes", "pepe", "ISBN 21", fecha4, "EDUCACION", 429.00, 28, "/img/educaFakes.jpg"));
-        libros.add(new LibroDTO("El arte de educar jugando", "pepe", "ISBN 22", fecha5, "EDUCACION", 379.00, 28, "/img/elArteDeEducar.jpg"));
-        libros.add(new LibroDTO("Aprendiendo a aprender", "pepe", "ISBN 23", fecha6, "EDUCACION", 547.00, 4, "/img/aprendiendoAprender.jpg"));
+        libros.add(new LibroDTO("El valor de educar", "Fernando Savater", "978-8434433960", fecha1, "EDUCACION", 691.00, 60, "/img/elValorDeEducar.jpg"));
+        libros.add(new LibroDTO("Enseñar a transgredir", "Marta Malo", "978-8412281842", fecha2, "EDUCACION", 489.00, 14, "/img/enseñarTransgredir.jpg"));
+        libros.add(new LibroDTO("Educar en la naturaleza", "Katia Hueso", "978-8418285936", fecha3, "EDUCACION", 719.00, 19, "/img/educarNaturaleza.jpg"));
+        libros.add(new LibroDTO("EducaFakes", "Daniel Turienzo", "978-8412878714", fecha4, "EDUCACION", 429.00, 28, "/img/educaFakes.jpg"));
+        libros.add(new LibroDTO("El arte de educar jugando", "Silvia Álava", "978-8412334296", fecha5, "EDUCACION", 706.00, 28, "/img/elArteDeEducar.jpg"));
+        libros.add(new LibroDTO("Aprendiendo a aprender", "Hector Ruiz Martin", "978-8418045301", fecha6, "EDUCACION", 547.00, 4, "/img/aprendiendoAprender.jpg"));
 
         return libros;
     }
