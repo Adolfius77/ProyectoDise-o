@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
  *
  * @author adoil
  */
+//xd
 public class GUIcarritoDetalle extends javax.swing.JPanel {
 
     private LibroDTO libro;
