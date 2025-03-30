@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
  * @author adoil
  */
 //xd
+//soy adolfo no sopas
 public class GUIcarritoDetalle extends javax.swing.JPanel {
 
     private LibroDTO libro;
