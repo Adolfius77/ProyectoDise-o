@@ -15,13 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
 
-    private List<LibroDTO> carrito = new ArrayList<>();
+    private List<LibroDTO> carrito;
 
     /**
      * Creates new form GUISeleccionMetodoEnvio
      */
-    public GUISeleccionMetodoEnvio() {
+    public GUISeleccionMetodoEnvio(List<LibroDTO> carritoRecibido) {
         initComponents();
+        this.carrito = carritoRecibido != null ? carritoRecibido : new ArrayList<>(); 
+        setLocationRelativeTo(null); 
     }
 
     /**

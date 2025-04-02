@@ -11,13 +11,14 @@ import java.time.LocalDate;
  * @author USER
  */
 public class DTOTarjetaMastercard {
-   private int numeroTarjeta;
-   private String nombreTitular;
-   private int cvv;
-   private LocalDate fechaVencimiento;
-   private String correoElectronico;
 
-    public DTOTarjetaMastercard(int numeroTarjeta, String nombreTitular, int cvv, LocalDate fechaVencimiento, String correoElectronico) {
+    private String numeroTarjeta;
+    private String nombreTitular;
+    private String cvv;
+    private LocalDate fechaVencimiento;
+    private String correoElectronico;
+
+    public DTOTarjetaMastercard(String numeroTarjeta, String nombreTitular, String cvv, LocalDate fechaVencimiento, String correoElectronico) {
         this.numeroTarjeta = numeroTarjeta;
         this.nombreTitular = nombreTitular;
         this.cvv = cvv;
@@ -25,11 +26,11 @@ public class DTOTarjetaMastercard {
         this.correoElectronico = correoElectronico;
     }
 
-    public int getNumeroTarjeta() {
+    public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
-    public void setNumeroTarjeta(int numeroTarjeta) {
+    public void setNumeroTarjeta(String numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
 
@@ -41,11 +42,11 @@ public class DTOTarjetaMastercard {
         this.nombreTitular = nombreTitular;
     }
 
-    public int getCvv() {
+    public String getCvv() {
         return cvv;
     }
 
-    public void setCvv(int cvv) {
+    public void setCvv(String cvv) {
         this.cvv = cvv;
     }
 
@@ -69,6 +70,5 @@ public class DTOTarjetaMastercard {
     public String toString() {
         return "DTOTarjetaMastercard{" + "numeroTarjeta=" + numeroTarjeta + ", nombreTitular=" + nombreTitular + ", cvv=" + cvv + ", fechaVencimiento=" + fechaVencimiento + ", correoElectronico=" + correoElectronico + '}';
     }
-   
-   
+
 }
