@@ -26,13 +26,18 @@ public class GUICarrito extends javax.swing.JFrame {
      * @param carritoRecibido
      */
     public GUICarrito(List<LibroDTO> carritoRecibido) {
-
         initComponents();
-        this.carritoLista = carritoRecibido;
+        this.carritoLista = carritoRecibido != null ? carritoRecibido : new java.util.ArrayList<>();
+        
 
         configurarNavegacion();
         mostrarItemsCarrito();
         setLocationRelativeTo(null);
+    }
+    
+    public void actualizarListaCarrito(){
+        System.out.println("Actualizando vista del carrito...");
+        mostrarItemsCarrito();
     }
 
     private void configurarNavegacion() {
@@ -118,7 +123,7 @@ public class GUICarrito extends javax.swing.JFrame {
                 LibroDTO libro = libroPorIsbn.get(isbn);
 
                 if (libro != null) {
-                    GUIcarritoDetalle detallePanel = new GUIcarritoDetalle(libro, cantidad);
+                    GUIcarritoDetalle detallePanel = new GUIcarritoDetalle(libro, cantidad, this);
                     PanelPrueba.add(detallePanel);
 
                     precioTotalCarrito += libro.getPrecio() * cantidad;

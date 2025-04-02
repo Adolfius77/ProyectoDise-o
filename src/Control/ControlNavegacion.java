@@ -140,4 +140,25 @@ public class ControlNavegacion {
         }
     }
     
+    public void agregarLibroCarrito(LibroDTO libro){
+        if(libro != null && this.carrito != null ){
+            this.carrito.add(libro);
+            System.out.println("Se añadio al carrito el libro : " + libro.getTitulo() + ", total en la lista: " + this.carrito.size());
+        }else{
+            System.err.println("Error al intentar añadir el libro");
+        }
+    }
+    
+    public void eliminarLibroCarrito(LibroDTO libro){
+        if(libro != null && this.carrito != null){
+            boolean remover = this.carrito.remove(libro);
+            if(remover){
+                System.out.println("Se elimino del carrito el libro: " + libro.getTitulo() + ", total en la lista: " + this.carrito.size());
+            }else{
+                System.out.println("Error al intentar encontrar el libro: " + libro.getTitulo());
+            }
+        }else{
+            System.err.println("Error al intentar eliminar el libro");
+        }
+    }
 }

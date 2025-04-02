@@ -7,6 +7,7 @@ package Presentacion;
 import DTOS.LibroDTO;
 import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
+import Control.ControlNavegacion;
 
 /**
  *
@@ -18,12 +19,18 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
 
     private LibroDTO libro;
     private int cantidadEnCarrito;
+    private GUICarrito carritoFrame;
 
-    public GUIcarritoDetalle(LibroDTO libro, int cantidad) {
+    public GUIcarritoDetalle(LibroDTO libro, int cantidad, GUICarrito carritoFrame) {
         initComponents();
         this.libro = libro;
         this.cantidadEnCarrito = cantidad;
+        this.carritoFrame = carritoFrame;
         mostrarLibroDetalle(libro,cantidad);
+        
+        if(BtnEliminar != null){
+            BtnEliminar.setEnabled(cantidad > 0);
+        }
     }
 
     
@@ -33,10 +40,14 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
         lblPrecioLibro.setText(String.format("%.2f", libro.getPrecio()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         LblAnioLibro.setText(dateFormat.format(libro.getFechaLanzamiento()));
-        lblCantidad.setText(String.valueOf(cantidad));
+        lblCantidad.setText("Cantidad: ");
         cantidadtxt.setText("Cantidad: ");
         
         cargarImagen(libro.getRutaImagen());
+        
+        if(cantidadtxt != null){
+            cantidadtxt.setText(String.valueOf(cantidad));
+        }
     }
 
     private void cargarImagen(String rutaImagen) {
@@ -247,11 +258,23 @@ public class GUIcarritoDetalle extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Desea eliminar una copia del libro: " + libro.getTitulo());
+        if(libro != null && carritoFrame != null){
+            ControlNavegacion.getInstase().eliminarLibroCarrito(this.libro);
+            carritoFrame.actualizarListaCarrito();
+        }else{
+            System.err.println("Error al intentrar eliminar una copia del libro");
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        // TODO add your handling code here:
+        System.out.println("Desea agregar otra copia del libro: " + libro.getTitulo());
+        if(libro != null && carritoFrame != null){
+            ControlNavegacion.getInstase().agregarLibroCarrito(this.libro);
+            carritoFrame.actualizarListaCarrito();
+        }else{
+            System.err.println("Error al intentrar agregar otra copia del libro");
+        }
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
 
