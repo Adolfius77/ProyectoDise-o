@@ -4,9 +4,11 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +23,52 @@ public class GUIPerfil extends javax.swing.JFrame {
 
     public GUIPerfil() {
         initComponents();
+        configurarNavegacionPerfil();
+        setLocationRelativeTo(null);
     }
 
+    private void configurarNavegacionPerfil() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        if (BtnPerfil != null) {
+            BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        if (BtnCarrito != null) {
+            BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
+        }
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+        if(btnCategorias != null){
+            btnCategorias.addActionListener(evt -> navegador.navegarCategorias(this));
+        }
+    }
+    
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this); // Usa tu nombre de método
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0); // Resetear
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +84,7 @@ public class GUIPerfil extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        BtnPerfil1 = new javax.swing.JButton();
+        BtnPerfil = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -91,8 +137,8 @@ public class GUIPerfil extends javax.swing.JFrame {
         jLabel21.setBackground(new java.awt.Color(217, 202, 218));
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
 
-        BtnPerfil1.setBackground(new java.awt.Color(101, 85, 143));
-        BtnPerfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
+        BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
 
         btnCategorias.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         btnCategorias.setText("CATEGORIAS");
@@ -114,7 +160,7 @@ public class GUIPerfil extends javax.swing.JFrame {
                 .addGap(368, 368, 368)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1201, Short.MAX_VALUE)
-                .addComponent(BtnPerfil1)
+                .addComponent(BtnPerfil)
                 .addGap(47, 47, 47)
                 .addComponent(BtnCarrito)
                 .addGap(51, 51, 51)
@@ -136,7 +182,7 @@ public class GUIPerfil extends javax.swing.JFrame {
                             .addComponent(BtnCarrito)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(CMBOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnPerfil1)))
+                            .addComponent(BtnPerfil)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,6 +360,7 @@ public class GUIPerfil extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
 //        GUIINICIO inicio = new GUIINICIO();
 //        inicio.setVisible(true);
@@ -321,7 +368,7 @@ public class GUIPerfil extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-//        GUICarrito carrito = new GUICarrito(this.carrito);
+//      GUICarrito carrito = new GUICarrito(this.carrito);
 //        carrito.setVisible(true);
 //        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
@@ -386,7 +433,7 @@ public class GUIPerfil extends javax.swing.JFrame {
     private javax.swing.JButton BTNCambioContraseña;
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
-    private javax.swing.JButton BtnPerfil1;
+    private javax.swing.JButton BtnPerfil;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JButton btnCategorias;
     private javax.swing.JLabel jLabel1;
