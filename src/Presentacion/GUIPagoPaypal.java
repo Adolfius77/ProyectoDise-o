@@ -1,5 +1,6 @@
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.DTOPayPal;
 import DTOS.LibroDTO;
 import Infraestructura.IMetodoPago;
@@ -29,11 +30,60 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
      * Creates new form GUIPagoPaypal
      */
     public GUIPagoPaypal(double monto, List<LibroDTO> carrito) {
-        initComponents();
         this.montoAPagar = monto;
         this.carrito = carrito != null ? carrito : new ArrayList<>();
         setTitle("Pago con PayPal - Monto: $" + String.format("%.2f", monto));
         setLocationRelativeTo(null);
+    }
+    
+    public GUIPagoPaypal() {
+        initComponents();
+        configurarNavegacion();
+    }
+    
+    private void configurarNavegacion() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        if (btnCategorias != null) {
+            btnCategorias.addActionListener(evt -> navegador.navegarCategorias(this));
+        }
+        if (BtnPerfil != null) {
+            BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        if (BtnCarrito != null){
+            BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
+        }           
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+        if (BTNPagarPaypal != null) {
+//            BTNPagarPaypal.addActionListener(evt -> navegador.navegarPaginaPagoPaypal(this));
+        }
+    }
+    
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this);
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0);
     }
 
     /**
@@ -59,7 +109,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        BtnPerfil1 = new javax.swing.JButton();
+        BtnPerfil = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -159,11 +209,11 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
 
-        BtnPerfil1.setBackground(new java.awt.Color(101, 85, 143));
-        BtnPerfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
-        BtnPerfil1.addActionListener(new java.awt.event.ActionListener() {
+        BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
+        BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPerfil1ActionPerformed(evt);
+                BtnPerfilActionPerformed(evt);
             }
         });
 
@@ -187,7 +237,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                 .addGap(385, 385, 385)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnPerfil1)
+                .addComponent(BtnPerfil)
                 .addGap(47, 47, 47)
                 .addComponent(BtnCarrito)
                 .addGap(51, 51, 51)
@@ -209,7 +259,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                             .addComponent(BtnCarrito)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(CMBOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnPerfil1)))
+                            .addComponent(BtnPerfil)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,7 +323,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         if (correo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
@@ -285,9 +335,11 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Favor de llenar todos los campos requeridos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Pagando...", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+            ControlNavegacion.getInstase().navegarPaginaSeleccionEnvio(this);
+//            this.dispose();
         }
 
-        DTOPayPal detallesDto = new DTOPayPal(correo, contra, 0);
+        DTOPayPal detallesDto = new DTOPayPal(correo, contra);
         contra = null;
 
         IMetodoPago metodoPago = new PagoPaypal();
@@ -305,9 +357,9 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
                 this.dispose();
 
             } else {
-
-                String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
-                JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
+//
+//                String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
+//                JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
 
             }
         } catch (Exception e) {
@@ -338,11 +390,11 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
-    private void BtnPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfil1ActionPerformed
+    private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
 //        GUIPerfil perfil = new GUIPerfil();
 //        perfil.setVisible(true);
 //        this.dispose();
-    }//GEN-LAST:event_BtnPerfil1ActionPerformed
+    }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void TxtFldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldContraseñaActionPerformed
         String contraseña = TxtFldContraseña.getText().trim();
@@ -350,7 +402,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         if (contraseña.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldContraseñaActionPerformed
 
@@ -401,7 +453,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
     private javax.swing.JButton BTNPagarPaypal;
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
-    private javax.swing.JButton BtnPerfil1;
+    private javax.swing.JButton BtnPerfil;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JTextField TxtFldContraseña;
     private javax.swing.JTextField TxtFldCorreo;

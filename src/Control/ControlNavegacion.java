@@ -51,7 +51,7 @@ public class ControlNavegacion {
         if (this.carrito != null) {
             this.carrito.clear();
         }
-        System.out.println("carrito limpiado");
+        System.out.println("Todos los artículos del carrito han sido eliminados.");
     }
 
     public void navegarInicio(JFrame frameActual) {
@@ -109,13 +109,30 @@ public class ControlNavegacion {
             frameActual.dispose();
         }
     }
+    
+    // Constructor para acceder al GUI Pago con Mastercard
+    public void navegarPaginaPagoTarjeta(JFrame frameActual) {
+        GUIPagoMastercard mastercard = new GUIPagoMastercard();
+        mastercard.setVisible(true);
+        if (frameActual != null) {
+            frameActual.dispose();
+        }
+    }
 
     public void navegarPaypal(JFrame frameActual, double monto, List<LibroDTO> carrito) {
         GUIPagoPaypal paypal = new GUIPagoPaypal(monto, carrito);
         paypal.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
-
+        }
+    }
+    
+    // Constructor para acceder al GUI Pago con Paypal
+    public void navegarPaginaPagoPaypal(JFrame frameActual) {
+        GUIPagoPaypal paypal = new GUIPagoPaypal();
+        paypal.setVisible(true);
+        if (frameActual != null) {
+            frameActual.dispose();
         }
     }
 
@@ -124,10 +141,18 @@ public class ControlNavegacion {
         MetodoEnvio.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
-
         }
     }
 
+    // Constructor para acceder al GUI de Seleccion de envio
+    public void navegarPaginaSeleccionEnvio(JFrame frameActual) {
+        GUISeleccionMetodoEnvio MetodoEnvio = new GUISeleccionMetodoEnvio();
+        MetodoEnvio.setVisible(true);
+        if (frameActual != null) {
+            frameActual.dispose();
+        }
+    }
+    
     public void navegarEnvioEstafeta(JFrame frameActual) {
         GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
         estafeta.setVisible(true);
@@ -158,7 +183,7 @@ public class ControlNavegacion {
     public void agregarLibroCarrito(LibroDTO libro) {
         if (libro != null && this.carrito != null) {
             this.carrito.add(libro);
-            System.out.println("Se añadio al carrito el libro : " + libro.getTitulo() + ", total en la lista: " + this.carrito.size());
+            System.out.println("Se añadio al el libro al carrito: " + libro.getTitulo() + ", Libros en el carrito: " + this.carrito.size());
         } else {
             System.err.println("Error al intentar añadir el libro");
         }

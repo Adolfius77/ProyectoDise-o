@@ -59,7 +59,7 @@ public class GUICarrito extends javax.swing.JFrame {
         }
         // Botón Proceder al Pago
         if (BtnPagar != null) {
-            BtnPagar.addActionListener(evt -> navegador.navegarPaginaPagos(this));
+//            BtnPagar.addActionListener(evt -> navegador.navegarPaginaPagos(this));
         }
     }
 
@@ -84,7 +84,10 @@ public class GUICarrito extends javax.swing.JFrame {
         }
         CMBOpciones.setSelectedIndex(0);
     }
-
+    
+    Map<String, Integer> conteoLibros = new HashMap<>();
+    Map<String, LibroDTO> libroPorIsbn = new HashMap<>();
+        
     private void mostrarItemsCarrito() {
         if (PanelPrueba == null) {
             System.err.println("panel dinamico es igual a nulo");
@@ -95,9 +98,6 @@ public class GUICarrito extends javax.swing.JFrame {
             carritoLista = new java.util.ArrayList<>();
         }
         PanelPrueba.removeAll(); // limpia el carrito antes de añadir
-
-        Map<String, Integer> conteoLibros = new HashMap<>();
-        Map<String, LibroDTO> libroPorIsbn = new HashMap<>();
 
         for (LibroDTO libro : carritoLista) {
             if (libro != null && libro.getIsbn() != null) {
@@ -115,7 +115,7 @@ public class GUICarrito extends javax.swing.JFrame {
         int totalDeArticulos = 0;
 
         if (conteoLibros.isEmpty()) {
-            PanelPrueba.add(new javax.swing.JLabel("el carrito esta vacio"));
+            PanelPrueba.add(new javax.swing.JLabel("El carrito esta vacio."));
         } else {
             for (Map.Entry<String, Integer> entry : conteoLibros.entrySet()) {
                 String isbn = entry.getKey();
@@ -527,9 +527,11 @@ public class GUICarrito extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtTotalPagarActionPerformed
 
     private void BtnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagarActionPerformed
-//        GUIPaginaPagos paginaPagos = new GUIPaginaPagos();
-//        paginaPagos.setVisible(true);
-//        this.dispose();
+        if (conteoLibros.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe agregar al menos un libro para continuar con el pago.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ControlNavegacion.getInstase().navegarPaginaPagos(this);
+     }
     }//GEN-LAST:event_BtnPagarActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed

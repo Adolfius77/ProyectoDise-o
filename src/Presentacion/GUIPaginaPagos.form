@@ -103,7 +103,7 @@
                   <EmptySpace min="-2" pref="326" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="398" max="-2" attributes="0"/>
                   <EmptySpace pref="358" max="32767" attributes="0"/>
-                  <Component id="BtnPerfil1" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnPerfil" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="BtnCarrito" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -124,7 +124,7 @@
                               <Component id="BtnCarrito" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="CMBOpciones" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
-                              <Component id="BtnPerfil1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="BtnPerfil" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -215,7 +215,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BtnPerfil1">
+        <Component class="javax.swing.JButton" name="BtnPerfil">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="8f" green="55" red="65" type="rgb"/>
@@ -225,7 +225,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPerfil1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPerfilActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCategorias">

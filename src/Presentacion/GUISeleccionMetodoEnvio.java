@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,60 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
      * Creates new form GUISeleccionMetodoEnvio
      */
     public GUISeleccionMetodoEnvio(List<LibroDTO> carritoRecibido) {
-        initComponents();
         this.carrito = carritoRecibido != null ? carritoRecibido : new ArrayList<>(); 
         setLocationRelativeTo(null); 
     }
+    
+    public GUISeleccionMetodoEnvio() {
+       initComponents();
+       configurarNavegacion();
+    }
+    
+     private void configurarNavegacion() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        if (btnCategorias != null) {
+            btnCategorias.addActionListener(evt -> navegador.navegarCategorias(this));
+        }
+        if (BtnPerfil != null) {
+            BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        if (BtnCarrito != null){
+            BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
+        }           
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+//        if (BTNPagarPaypal != null) {
+//            BTNPagarPaypal.addActionListener(evt -> navegador.navegarPaginaPagoPaypal(this));
+//        }
+    }
+    
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this);
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -416,7 +466,7 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUISeleccionMetodoEnvio().setVisible(true);
+//                new GUISeleccionMetodoEnvio().setVisible(true);
             }
         });
     }

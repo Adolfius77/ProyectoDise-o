@@ -11,12 +11,10 @@ package DTOS;
 public class DTOPayPal {
     private String correoElectronico;
     private String contraseña;
-    private int tarjetasVinculadas;
 
-    public DTOPayPal(String correoElectronico, String contraseña, int tarjetasVinculadas) {
+    public DTOPayPal(String correoElectronico, String contraseña) {
         this.correoElectronico = correoElectronico;
         this.contraseña = contraseña;
-        this.tarjetasVinculadas = tarjetasVinculadas;
     }
 
     public String getCorreoElectronico() {
@@ -34,14 +32,4 @@ public class DTOPayPal {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-
-    public int getTarjetasVinculadas() {
-        return tarjetasVinculadas;
-    }
-
-    public void setTarjetasVinculadas(int tarjetasVinculadas) {
-        this.tarjetasVinculadas = tarjetasVinculadas;
-    }
-    
-    
 }

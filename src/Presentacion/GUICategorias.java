@@ -101,7 +101,7 @@ public class GUICategorias extends javax.swing.JFrame {
 
         //Libros Cocina
         libros.add(new LibroDTO("Stardew Valley Cookbook", "ConcernedApe", "978-1984862051", fecha1, "COCINA", 616.00, 4, "/img/StardewCookbook.jpg"));
-        libros.add(new LibroDTO("Oh, my cookie!", "Noelia Toré", "978-8410442542", fecha2, "COCINA", 529.00, 12, "/img/ohMyCookie.jpg"));
+        libros.add(new LibroDTO("Oh, My Cookie!", "Noelia Toré", "978-8410442542", fecha2, "COCINA", 529.00, 12, "/img/ohMyCookie.jpg"));
         libros.add(new LibroDTO("Con las manos en la masa madre", "Bernardo Flores Alanís", "978-6072134058", fecha3, "COCINA", 569.00, 43, "/img/masaMadre.jpg"));
         libros.add(new LibroDTO("El gran libro de la reposteria", "Christian Teubner", "978-8424108229", fecha4, "COCINA", 616.00, 50, "/img/ElGranLibroDeLaReposteria.jpg"));
         libros.add(new LibroDTO("Cocinologia: la ciencia de la cocina", "Stuart Farrimond", "978-1465486844", fecha5, "COCINA", 515.00, 37, "/img/cocinologia.jpg"));

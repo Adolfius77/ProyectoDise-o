@@ -4,9 +4,11 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,8 +21,56 @@ private List<LibroDTO> carrito = new ArrayList<>();
      */
     public GUIPaginaPagos() {
         initComponents();
+        configurarNavegacion();
     }
+    
+    private void configurarNavegacion() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        if (btnCategorias != null) {
+            btnCategorias.addActionListener(evt -> navegador.navegarCategorias(this));
+        }
+        if (BtnPerfil != null) {
+            BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        if (BtnCarrito != null){
+            BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
+        }           
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+        if (BTNPaypal != null) {
+            BTNPaypal.addActionListener(evt -> navegador.navegarPaginaPagoPaypal(this));
+        }
+        if (BTNTarjeta1 != null) {
+            BTNTarjeta1.addActionListener(evt -> navegador.navegarPaginaPagoTarjeta(this));
+        }
+    }
+    
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this);
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +86,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
         jLabel2 = new javax.swing.JLabel();
         CMBOpciones = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        BtnPerfil1 = new javax.swing.JButton();
+        BtnPerfil = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -88,11 +138,11 @@ private List<LibroDTO> carrito = new ArrayList<>();
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/list.png"))); // NOI18N
 
-        BtnPerfil1.setBackground(new java.awt.Color(101, 85, 143));
-        BtnPerfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
-        BtnPerfil1.addActionListener(new java.awt.event.ActionListener() {
+        BtnPerfil.setBackground(new java.awt.Color(101, 85, 143));
+        BtnPerfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPerfil1ActionPerformed(evt);
+                BtnPerfilActionPerformed(evt);
             }
         });
 
@@ -116,7 +166,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
                 .addGap(326, 326, 326)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
-                .addComponent(BtnPerfil1)
+                .addComponent(BtnPerfil)
                 .addGap(47, 47, 47)
                 .addComponent(BtnCarrito)
                 .addGap(51, 51, 51)
@@ -135,7 +185,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
                             .addComponent(BtnCarrito)
                             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(CMBOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnPerfil1)))
+                            .addComponent(BtnPerfil)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -357,11 +407,11 @@ private List<LibroDTO> carrito = new ArrayList<>();
         // TODO add your handling code here:
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
-    private void BtnPerfil1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfil1ActionPerformed
+    private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
 //        GUIPerfil perfil = new GUIPerfil();
 //        perfil.setVisible(true);
 //        this.dispose();
-    }//GEN-LAST:event_BtnPerfil1ActionPerformed
+    }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BTNPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPaypalActionPerformed
 //        GUIPagoPaypal pagoPaypal = new GUIPagoPaypal();
@@ -421,7 +471,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
     private javax.swing.JButton BTNTarjeta1;
     private javax.swing.JButton BtnCarrito;
     private javax.swing.JButton BtnInicio;
-    private javax.swing.JButton BtnPerfil1;
+    private javax.swing.JButton BtnPerfil;
     private javax.swing.JComboBox<String> CMBOpciones;
     private javax.swing.JLabel LblCantArticulos;
     private javax.swing.JLabel LblprecioPagar;
