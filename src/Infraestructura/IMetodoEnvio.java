@@ -4,10 +4,15 @@
  */
 package Infraestructura;
 
+import DTOS.DTODireccion;
+import Negocio.ResultadoEnvio;
+
 /**
  *
- * @author garfi
+ * @author emiim
  */
 public interface IMetodoEnvio {
-    
+    public static final double COSTO_ENVIO_ESTANDAR = 20.0;
+
+    ResultadoEnvio procesarDireccion(DTODireccion direccion);
 }
