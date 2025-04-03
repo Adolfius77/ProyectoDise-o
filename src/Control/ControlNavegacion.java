@@ -28,136 +28,151 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class ControlNavegacion {
-    private static  ControlNavegacion instancia;
+
+    private static ControlNavegacion instancia;
 
     public ControlNavegacion() {
         this.carrito = new ArrayList<>();
     }
-    public static synchronized ControlNavegacion getInstase(){
-        if(instancia == null){
+
+    public static synchronized ControlNavegacion getInstase() {
+        if (instancia == null) {
             instancia = new ControlNavegacion();
         }
-        return  instancia;
+        return instancia;
     }
     private List<LibroDTO> carrito;
-    
-    public List<LibroDTO> getCarrito(){
+
+    public List<LibroDTO> getCarrito() {
         return carrito;
     }
-    public void limpiarCarrito(){
-        if(this.carrito != null){
+
+    public void limpiarCarrito() {
+        if (this.carrito != null) {
             this.carrito.clear();
         }
         System.out.println("carrito limpiado");
     }
-    public void navegarInicio(JFrame frameActual){
+
+    public void navegarInicio(JFrame frameActual) {
         GUIINICIO inicio = new GUIINICIO();
         inicio.setVisible(true);
-        if(frameActual != null){
+        if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarCategorias(JFrame frameActual){
+
+    public void navegarCategorias(JFrame frameActual) {
         GUICategorias categorias = new GUICategorias();
         categorias.setVisible(true);
-        if(frameActual != null){
+        if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarPerfil(JFrame frameActual){
+
+    public void navegarPerfil(JFrame frameActual) {
         GUIPerfil perfil = new GUIPerfil();
         perfil.setVisible(true);
-        if(frameActual != null){
+        if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarCarrito(JFrame frameActual){
+
+    public void navegarCarrito(JFrame frameActual) {
         GUICarrito carrito = new GUICarrito(this.carrito);
         carrito.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarCambioPasssword(JFrame frameActual){
+
+    public void navegarCambioPasssword(JFrame frameActual) {
         GUICambioContraseña contra = new GUICambioContraseña();
         contra.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarPaginaPagos(JFrame frameActual){
+
+    public void navegarPaginaPagos(JFrame frameActual) {
         GUIPaginaPagos paginaPagos = new GUIPaginaPagos();
         paginaPagos.setVisible(true);
-        if(frameActual != null){
+        if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarPagoConTarjeta(JFrame frameActual){
-        GUIPagoMastercard Mastercard = new GUIPagoMastercard();
+
+    public void navegarPagoConTarjeta(JFrame frameActual, double monto, List<LibroDTO> carrito) {
+        GUIPagoMastercard Mastercard = new GUIPagoMastercard(monto, carrito);
         Mastercard.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
         }
     }
-    public void navegarPaypal(JFrame frameActual){
-        GUIPagoPaypal paypal = new GUIPagoPaypal();
+
+    public void navegarPaypal(JFrame frameActual, double monto, List<LibroDTO> carrito) {
+        GUIPagoPaypal paypal = new GUIPagoPaypal(monto, carrito);
         paypal.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
-            
+
         }
     }
-    public void navegarSeleccionEnvio(JFrame frameActual){
-        GUISeleccionMetodoEnvio MetodoEnvio = new GUISeleccionMetodoEnvio();
+
+    public void navegarSeleccionEnvio(JFrame frameActual, List<LibroDTO> carritoRecibido) {
+        GUISeleccionMetodoEnvio MetodoEnvio = new GUISeleccionMetodoEnvio(carritoRecibido);
         MetodoEnvio.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
-            
+
         }
     }
-    public void navegarEnvioEstafeta(JFrame frameActual){
-       GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
-       estafeta.setVisible(true);
-       if(frameActual != null){
-           frameActual.dispose();
-       }
+
+    public void navegarEnvioEstafeta(JFrame frameActual) {
+        GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
+        estafeta.setVisible(true);
+        if (frameActual != null) {
+            frameActual.dispose();
+        }
     }
-    public void navegarEnvioDHL(JFrame frameActual){
+
+    public void navegarEnvioDHL(JFrame frameActual) {
         GUIEnvioDHL dhl = new GUIEnvioDHL();
         dhl.setVisible(true);
         if (frameActual != null) {
             frameActual.dispose();
-            
+
         }
     }
-    public void cerrarSesion(JFrame frameActual){
+
+    public void cerrarSesion(JFrame frameActual) {
         limpiarCarrito();
-        
+
         JOptionPane.showMessageDialog(frameActual, "todavia no agrego esta parte xd");
-        if (frameActual !=null) {
+        if (frameActual != null) {
             frameActual.dispose();
-            
+
         }
     }
-    
-    public void agregarLibroCarrito(LibroDTO libro){
-        if(libro != null && this.carrito != null ){
+
+    public void agregarLibroCarrito(LibroDTO libro) {
+        if (libro != null && this.carrito != null) {
             this.carrito.add(libro);
             System.out.println("Se añadio al carrito el libro : " + libro.getTitulo() + ", total en la lista: " + this.carrito.size());
-        }else{
+        } else {
             System.err.println("Error al intentar añadir el libro");
         }
     }
-    
-    public void eliminarLibroCarrito(LibroDTO libro){
-        if(libro != null && this.carrito != null){
+
+    public void eliminarLibroCarrito(LibroDTO libro) {
+        if (libro != null && this.carrito != null) {
             boolean remover = this.carrito.remove(libro);
-            if(remover){
+            if (remover) {
                 System.out.println("Se elimino del carrito el libro: " + libro.getTitulo() + ", total en la lista: " + this.carrito.size());
-            }else{
+            } else {
                 System.out.println("Error al intentar encontrar el libro: " + libro.getTitulo());
             }
-        }else{
+        } else {
             System.err.println("Error al intentar eliminar el libro");
         }
     }

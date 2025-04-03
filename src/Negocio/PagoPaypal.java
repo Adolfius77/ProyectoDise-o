@@ -5,13 +5,15 @@
 package Negocio;
 
 import DTOS.DTOPayPal;
+import Infraestructura.IMetodoPago;
 
 /**
  *
  * @author garfi
  */
-public class PagoPaypal {
+public class PagoPaypal implements IMetodoPago{
 
+    @Override
     public ResultadoPago procesarPago(double monto, Object detallesPago) {
         if (!(detallesPago instanceof DTOPayPal)) {
             return new ResultadoPago(false, "Detalles de pago inválidos para PayPal.");
@@ -20,7 +22,7 @@ public class PagoPaypal {
         DTOPayPal dto = (DTOPayPal) detallesPago;
 
         String correo = dto.getCorreoElectronico();
-        String contrasena = dto.getContraseña(); // ¡Manejar con precaución!
+        String contrasena = dto.getContraseña(); 
 
         System.out.println("--- Procesando pago PayPal ---");
         System.out.println("Monto: " + monto);
@@ -35,11 +37,11 @@ public class PagoPaypal {
         boolean exitoSimulado = true;
 
         if (exitoSimulado) {
-            System.out.println("--- Pago PayPal APROBADO (Simulado) ---");
+            System.out.println("--- Pago PayPal APROBADO ---");
             return new ResultadoPago(true, "Pago con PayPal exitoso.");
         } else {
-            System.err.println("--- Pago PayPal RECHAZADO (Simulado) ---");
-            return new ResultadoPago(false, "Pago con PayPal rechazado (simulado).");
+            System.err.println("--- Pago PayPal RECHAZADO ---");
+            return new ResultadoPago(false, "Pago con PayPal rechazado.");
         }
     }
 }

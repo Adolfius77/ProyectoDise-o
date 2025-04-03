@@ -1,8 +1,11 @@
 package Presentacion;
 
+import DTOS.DTOPayPal;
 import DTOS.LibroDTO;
+import Infraestructura.IMetodoPago;
+import Negocio.ResultadoPago;
 import Presentacion.GUICarrito;
-
+import Negocio.PagoPaypal;
 import Presentacion.GUIINICIO;
 import Presentacion.GUIPerfil;
 import java.util.ArrayList;
@@ -13,18 +16,24 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author emiim
  */
 public class GUIPagoPaypal extends javax.swing.JFrame {
-private List<LibroDTO> carrito = new ArrayList<>();
+
+    private double montoAPagar;
+    private List<LibroDTO> carrito;
+
     /**
      * Creates new form GUIPagoPaypal
      */
-    public GUIPagoPaypal() {
+    public GUIPagoPaypal(double monto, List<LibroDTO> carrito) {
         initComponents();
+        this.montoAPagar = monto;
+        this.carrito = carrito != null ? carrito : new ArrayList<>();
+        setTitle("Pago con PayPal - Monto: $" + String.format("%.2f", monto));
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -260,25 +269,57 @@ private List<LibroDTO> carrito = new ArrayList<>();
 
     private void TxtFldCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldCorreoActionPerformed
         String correo = TxtFldCorreo.getText().trim();
-        
-    if (correo.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-    } else { 
-    JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+        if (correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 
     private void BTNPagarPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPagarPaypalActionPerformed
-             String correo = TxtFldCorreo.getText().trim();
+        String correo = TxtFldCorreo.getText().trim();
         String contra = TxtFldContraseña.getText().trim();
-       if (correo.isEmpty() || contra.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Favor de llenar todos los campos requeridos.", "Error", JOptionPane.ERROR_MESSAGE);
-    } else { 
-    JOptionPane.showMessageDialog(this, "Pagando...", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+        if (correo.isEmpty() || contra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Favor de llenar todos los campos requeridos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Pagando...", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
-        GUISeleccionMetodoEnvio SME = new GUISeleccionMetodoEnvio();
-        SME.setVisible(true);
-        this.dispose();
+
+        DTOPayPal detallesDto = new DTOPayPal(correo, contra, 0);
+        contra = null;
+
+        IMetodoPago metodoPago = new PagoPaypal();
+        ResultadoPago resultado = null;
+
+        try {
+            resultado = metodoPago.procesarPago(this.montoAPagar, detallesDto);
+
+            if (resultado != null && resultado.isExito()) {
+
+                JOptionPane.showMessageDialog(this, resultado.getMensaje(), "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                GUISeleccionMetodoEnvio SiguientePantalla = new GUISeleccionMetodoEnvio(this.carrito);
+                SiguientePantalla.setVisible(true);
+                this.dispose();
+
+            } else {
+
+                String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
+                JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
+
+            }
+        } catch (Exception e) {
+
+            System.err.println("Error al procesar el pago con PayPal: " + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al procesar el pago.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
+        }
+
+//        GUISeleccionMetodoEnvio SME = new GUISeleccionMetodoEnvio();
+//        SME.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_BTNPagarPaypalActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
@@ -305,11 +346,11 @@ private List<LibroDTO> carrito = new ArrayList<>();
 
     private void TxtFldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldContraseñaActionPerformed
         String contraseña = TxtFldContraseña.getText().trim();
-        
-    if (contraseña.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-    } else { 
-    JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+        if (contraseña.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldContraseñaActionPerformed
 
@@ -349,7 +390,9 @@ private List<LibroDTO> carrito = new ArrayList<>();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIPagoPaypal().setVisible(true);
+                double montoPrueba = 100.0;
+                List<LibroDTO> pruebaCarrito = new ArrayList<>();
+                new GUIPagoPaypal(montoPrueba, pruebaCarrito).setVisible(true);
             }
         });
     }
@@ -373,4 +416,3 @@ private List<LibroDTO> carrito = new ArrayList<>();
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
-
