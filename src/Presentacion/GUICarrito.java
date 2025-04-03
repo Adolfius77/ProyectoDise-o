@@ -28,15 +28,14 @@ public class GUICarrito extends javax.swing.JFrame {
     public GUICarrito(List<LibroDTO> carritoRecibido) {
         initComponents();
         this.carritoLista = carritoRecibido != null ? carritoRecibido : new java.util.ArrayList<>();
-        
 
         configurarNavegacion();
         mostrarItemsCarrito();
         setLocationRelativeTo(null);
     }
-    
-    public void actualizarListaCarrito(){
-        System.out.println("Actualizando vista del carrito...");
+
+    public void actualizarListaCarrito() {
+        System.out.println("GUICarrito: actualizarListaCarrito() llamado. Tamaño lista ahora: " + (carritoLista != null ? carritoLista.size() : "null"));
         mostrarItemsCarrito();
     }
 
@@ -84,10 +83,7 @@ public class GUICarrito extends javax.swing.JFrame {
         }
         CMBOpciones.setSelectedIndex(0);
     }
-    
-    Map<String, Integer> conteoLibros = new HashMap<>();
-    Map<String, LibroDTO> libroPorIsbn = new HashMap<>();
-        
+
     private void mostrarItemsCarrito() {
         if (PanelPrueba == null) {
             System.err.println("panel dinamico es igual a nulo");
@@ -98,7 +94,10 @@ public class GUICarrito extends javax.swing.JFrame {
             carritoLista = new java.util.ArrayList<>();
         }
         PanelPrueba.removeAll(); // limpia el carrito antes de añadir
-
+        
+        Map<String, Integer> conteoLibros = new HashMap<>();
+        Map<String, LibroDTO> libroPorIsbn = new HashMap<>();
+        
         for (LibroDTO libro : carritoLista) {
             if (libro != null && libro.getIsbn() != null) {
                 String isbn = libro.getIsbn();
@@ -141,7 +140,7 @@ public class GUICarrito extends javax.swing.JFrame {
             TxtTotalPagar.setText(String.format("$%.2f", precioTotalCarrito));
         }
         if (BtnPagar != null) {
-            lblTotalArticulosValor.setEnabled(totalDeArticulos > 0);
+            BtnPagar.setEnabled(totalDeArticulos > 0);
         }
     }
 
@@ -527,11 +526,11 @@ public class GUICarrito extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtTotalPagarActionPerformed
 
     private void BtnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagarActionPerformed
-        if (conteoLibros.isEmpty()) {
+        if (carritoLista == null || carritoLista.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe agregar al menos un libro para continuar con el pago.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             ControlNavegacion.getInstase().navegarPaginaPagos(this);
-     }
+        }
     }//GEN-LAST:event_BtnPagarActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
