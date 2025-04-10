@@ -5,6 +5,7 @@
 package Control;
 
 import DTOS.LibroDTO;
+import Negocio.ManejoPagos;
 import Presentacion.GUICambioContraseña;
 import Presentacion.GUICarrito;
 import Presentacion.GUICategorias;
@@ -30,9 +31,11 @@ import javax.swing.JOptionPane;
 public class ControlNavegacion {
 
     private static ControlNavegacion instancia;
+    private ManejoPagos manejoPagos;
 
     public ControlNavegacion() {
         this.carrito = new ArrayList<>();
+        this.manejoPagos = new ManejoPagos();
     }
 
     public static synchronized ControlNavegacion getInstase() {
@@ -109,7 +112,7 @@ public class ControlNavegacion {
             frameActual.dispose();
         }
     }
-    
+
     // Constructor para acceder al GUI Pago con Mastercard
     public void navegarPaginaPagoTarjeta(JFrame frameActual) {
         GUIPagoMastercard mastercard = new GUIPagoMastercard();
@@ -126,7 +129,7 @@ public class ControlNavegacion {
             frameActual.dispose();
         }
     }
-    
+
     // Constructor para acceder al GUI Pago con Paypal
     public void navegarPaginaPagoPaypal(JFrame frameActual) {
         GUIPagoPaypal paypal = new GUIPagoPaypal();
@@ -152,7 +155,7 @@ public class ControlNavegacion {
             frameActual.dispose();
         }
     }
-    
+
     public void navegarEnvioEstafeta(JFrame frameActual) {
         GUIEnvioEstafeta estafeta = new GUIEnvioEstafeta();
         estafeta.setVisible(true);
@@ -201,4 +204,15 @@ public class ControlNavegacion {
             System.err.println("Error al intentar eliminar el libro");
         }
     }
+
+    public ManejoPagos getManejoPagos() {
+        return this.manejoPagos;
+    }
+
+    public void setManejoPagos(ManejoPagos manejoPagos) {
+        this.manejoPagos = manejoPagos;
+    }
+    
+    
+
 }

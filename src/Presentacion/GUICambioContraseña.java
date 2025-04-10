@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,52 @@ public class GUICambioContraseña extends javax.swing.JFrame {
      */
     public GUICambioContraseña() {
         initComponents();
+        configurarNavegacion();
+        setLocationRelativeTo(null);
+    }
+    
+    private void configurarNavegacion() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        
+        if (BtnPerfil1 != null) {
+            BtnPerfil1.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        // El botón Carrito en la pantalla Carrito no debería hacer nada o estar deshabilitado
+        // if (BtnCarrito != null) BtnCarrito.setEnabled(false);
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+        
+
+        if (BTNCambioContraseña != null) {
+            BTNCambioContraseña.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+    }
+
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this);
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0);
     }
 
     /**
@@ -277,15 +324,15 @@ public class GUICambioContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-        GUIINICIO inicio = new GUIINICIO();
-        inicio.setVisible(true);
-        this.dispose();
+//        GUIINICIO inicio = new GUIINICIO();
+//        inicio.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-        GUICarrito carrito = new GUICarrito(this.carrito);
-        carrito.setVisible(true);
-        this.dispose();
+//        GUICarrito carrito = new GUICarrito(this.carrito);
+//        carrito.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
     private void CMBOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMBOpcionesActionPerformed
@@ -334,9 +381,9 @@ public class GUICambioContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtFldNewContraActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        GUICategorias categorias = new GUICategorias();
-        categorias.setVisible(true);
-        this.dispose();
+//        GUICategorias categorias = new GUICategorias();
+//        categorias.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**

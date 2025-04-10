@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -57,8 +57,9 @@ public class GUICarrito extends javax.swing.JFrame {
             CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
         }
         // Botón Proceder al Pago
+
         if (BtnPagar != null) {
-//            BtnPagar.addActionListener(evt -> navegador.navegarPaginaPagos(this));
+            BtnPagar.addActionListener(evt -> navegador.navegarPaginaPagos(this));
         }
     }
 
@@ -529,7 +530,7 @@ public class GUICarrito extends javax.swing.JFrame {
         if (carritoLista == null || carritoLista.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe agregar al menos un libro para continuar con el pago.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            ControlNavegacion.getInstase().navegarPaginaPagos(this);
+//            ControlNavegacion.getInstase().navegarPaginaPagos(this);
         }
     }//GEN-LAST:event_BtnPagarActionPerformed
 

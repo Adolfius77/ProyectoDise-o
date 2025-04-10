@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Control.ControlNavegacion;
 import DTOS.LibroDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,53 @@ public class GUIEnvioEstafeta extends javax.swing.JFrame {
     /**
      * Creates new form GUIEnvioEstafeta
      */
-    public GUIEnvioEstafeta() {
+    public GUIEnvioEstafeta() {    
         initComponents();
+        configurarNavegacion();
+    }
+    
+    private void configurarNavegacion() {
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+
+        if (BtnInicio != null) {
+            BtnInicio.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+        
+        if (BtnPerfil != null) {
+            BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
+        }
+        // El botón Carrito en la pantalla Carrito no debería hacer nada o estar deshabilitado
+        // if (BtnCarrito != null) BtnCarrito.setEnabled(false);
+        if (CMBOpciones != null) {
+            CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
+        }
+        // Botón Proceder al Pago
+
+        if (btnPedirPaquete != null) {
+            btnPedirPaquete.addActionListener(evt -> navegador.navegarInicio(this));
+        }
+    }
+
+    private void manejarAccionOpciones() {
+        String seleccion = (String) CMBOpciones.getSelectedItem();
+        if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
+            return;
+        }
+
+        final ControlNavegacion navegador = ControlNavegacion.getInstase();
+        switch (seleccion) {
+            case "Cambiar Contraseña":
+                navegador.navegarCambioPasssword(this);
+                break;
+            case "Cerrar Sesion":
+                navegador.cerrarSesion(this);
+                break;
+            // ... otros casos ...
+            default:
+                JOptionPane.showMessageDialog(this, "'" + seleccion + "' no implementado.");
+                break;
+        }
+        CMBOpciones.setSelectedIndex(0);
     }
 
     /**

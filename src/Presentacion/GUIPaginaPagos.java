@@ -6,6 +6,9 @@ package Presentacion;
 
 import Control.ControlNavegacion;
 import DTOS.LibroDTO;
+import Negocio.ManejoPagos;
+import Negocio.PagoMastercard;
+import Negocio.PagoPaypal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,7 +18,9 @@ import javax.swing.JOptionPane;
  * @author emiim
  */
 public class GUIPaginaPagos extends javax.swing.JFrame {
-private List<LibroDTO> carrito = new ArrayList<>();
+
+    private List<LibroDTO> carrito = new ArrayList<>();
+
     /**
      * Creates new form GUIPaginaPagos
      */
@@ -23,7 +28,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
         initComponents();
         configurarNavegacion();
     }
-    
+
     private void configurarNavegacion() {
         final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
@@ -36,9 +41,9 @@ private List<LibroDTO> carrito = new ArrayList<>();
         if (BtnPerfil != null) {
             BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
         }
-        if (BtnCarrito != null){
+        if (BtnCarrito != null) {
             BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
-        }           
+        }
         if (CMBOpciones != null) {
             CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
         }
@@ -49,7 +54,7 @@ private List<LibroDTO> carrito = new ArrayList<>();
             BTNTarjeta1.addActionListener(evt -> navegador.navegarPaginaPagoTarjeta(this));
         }
     }
-    
+
     private void manejarAccionOpciones() {
         String seleccion = (String) CMBOpciones.getSelectedItem();
         if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
@@ -71,6 +76,25 @@ private List<LibroDTO> carrito = new ArrayList<>();
         }
         CMBOpciones.setSelectedIndex(0);
     }
+
+    private double calcularMontoTotal() {
+        double total = 0.0;
+        ControlNavegacion nav = ControlNavegacion.getInstase();
+        List<LibroDTO> carritoActual = nav.getCarrito();
+
+        if (carritoActual != null) {
+            for (LibroDTO libro : carritoActual) {
+                if (libro != null) {
+                    total += libro.getPrecio();
+                }
+            }
+        } else {
+            System.err.println("El carrito es null.");
+        }
+        System.out.println("Monto total del carrito = " + String.format("%.2f", total));
+        return total;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -414,15 +438,38 @@ private List<LibroDTO> carrito = new ArrayList<>();
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BTNPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNPaypalActionPerformed
-//        GUIPagoPaypal pagoPaypal = new GUIPagoPaypal();
-//            pagoPaypal.setVisible(true);
-//            this.dispose();
+        try {
+            ControlNavegacion nav = ControlNavegacion.getInstase();
+            ManejoPagos mp = nav.getManejoPagos();
+            mp.setMetodoPago(new PagoPaypal());
+
+            double montoTotal = calcularMontoTotal();
+            List<LibroDTO> carritoActual = nav.getCarrito();
+
+            nav.navegarPaypal(this, montoTotal, carritoActual);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al preparar el pago con PayPal: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_BTNPaypalActionPerformed
 
     private void BTNTarjeta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNTarjeta1ActionPerformed
-//        GUIPagoMastercard pagoMastercard = new GUIPagoMastercard();
-//            pagoMastercard.setVisible(true);
-//            this.dispose();
+        try {
+            ControlNavegacion nav = ControlNavegacion.getInstase();
+            ManejoPagos mp = nav.getManejoPagos();
+            mp.setMetodoPago(new PagoMastercard());
+
+            double montoTotal = calcularMontoTotal();
+            List<LibroDTO> carritoActual = nav.getCarrito();
+
+            nav.navegarPagoConTarjeta(this, montoTotal, carritoActual);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al preparar el pago con Tarjeta: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_BTNTarjeta1ActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed

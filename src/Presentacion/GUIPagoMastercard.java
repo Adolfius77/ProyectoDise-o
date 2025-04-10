@@ -8,6 +8,7 @@ import Control.ControlNavegacion;
 import DTOS.DTOTarjetaMastercard;
 import DTOS.LibroDTO;
 import Infraestructura.IMetodoPago;
+import Negocio.ManejoPagos;
 import Negocio.PagoMastercard;
 import Negocio.ResultadoPago;
 import Presentacion.GUISeleccionMetodoEnvio;
@@ -34,19 +35,18 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
      * Creates new form GUIPagoMastercard
      */
     public GUIPagoMastercard(double monto, List<LibroDTO> carritoActual) {
-        initComponents();
         this.montoAPagar = monto;
         this.carrito = carritoActual;
-        setTitle("Pago con Tarjeta - Monto: $" + String.format("%.2f", monto));
-        setLocationRelativeTo(null);
+        setTitle("Pago con Tarjeta - Monto: $" + String.format("%.2f", monto));    
     }
-    
+
     public GUIPagoMastercard() {
         initComponents();
         configurarNavegacion();
+        setLocationRelativeTo(null);
     }
 
-     private void configurarNavegacion() {
+    private void configurarNavegacion() {
         final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
         if (BtnInicio != null) {
@@ -58,9 +58,9 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
         if (BtnPerfil != null) {
             BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
         }
-        if (BtnCarrito != null){
+        if (BtnCarrito != null) {
             BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
-        }           
+        }
         if (CMBOpciones != null) {
             CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
         }
@@ -68,8 +68,8 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
             BTNPagarMastercard.addActionListener(evt -> navegador.navegarPaginaSeleccionEnvio(this));
         }
     }
-    
-     private void manejarAccionOpciones() {
+
+    private void manejarAccionOpciones() {
         String seleccion = (String) CMBOpciones.getSelectedItem();
         if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
             return;
@@ -90,9 +90,7 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
         }
         CMBOpciones.setSelectedIndex(0);
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -394,8 +392,6 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
         if (numTarjeta.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldNumTarjetaActionPerformed
 
@@ -410,63 +406,42 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Favor de llenar todos los campos requeridos.", "Datos Incompletos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         int cvvInt;
         LocalDate fechaVencimientoDate;
-        
+
         DateTimeFormatter formatter;
-        if (fechaVencimiento.matches("\\d{2}/\\d{4}")) { 
+        if (fechaVencimiento.matches("\\d{2}/\\d{4}")) {
             formatter = DateTimeFormatter.ofPattern("MM/yyyy");
-        } else if (fechaVencimiento.matches("\\d{2}/\\d{2}")) { 
+        } else if (fechaVencimiento.matches("\\d{2}/\\d{2}")) {
             formatter = DateTimeFormatter.ofPattern("MM/yy");
         } else {
-             throw new IllegalArgumentException("Formato de fecha inválido (use MM/AA o MM/AAAA).");
+            throw new IllegalArgumentException("Formato de fecha inválido (use MM/AA o MM/AAAA).");
         }
         try {
-             YearMonth ym = YearMonth.parse(fechaVencimiento, formatter);
-             fechaVencimientoDate = ym.atEndOfMonth();
+            YearMonth ym = YearMonth.parse(fechaVencimiento, formatter);
+            fechaVencimientoDate = ym.atEndOfMonth();
 
-             if (fechaVencimientoDate.isBefore(LocalDate.now().withDayOfMonth(1))) {
-                 throw new IllegalArgumentException("La tarjeta ha expirado.");
-             }
+            if (fechaVencimientoDate.isBefore(LocalDate.now().withDayOfMonth(1))) {
+                throw new IllegalArgumentException("La tarjeta ha expirado.");
+            }
         } catch (DateTimeParseException e) {
-             throw new IllegalArgumentException("Error al interpretar la fecha de vencimiento: " + e.getMessage());
+            throw new IllegalArgumentException("Error al interpretar la fecha de vencimiento: " + e.getMessage());
         }
-        
+
         DTOTarjetaMastercard detallesDto = new DTOTarjetaMastercard(numTarjeta, nombre, cvv, fechaVencimientoDate, correo);
 
-        IMetodoPago metodoPago = new PagoMastercard();
-
-        ResultadoPago resultado = null;
-        try {
-            resultado = metodoPago.procesarPago(this.montoAPagar, detallesDto);
-        } catch (Exception e) {
-            System.err.println("Error crítico al llamar a procesarPago (Mastercard): " + e.getMessage());
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al procesar el pago.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; 
-        }
-
+        ControlNavegacion nav = ControlNavegacion.getInstase();
+        ManejoPagos mp = nav.getManejoPagos();
+        ResultadoPago resultado = mp.ejecutarPago(this.montoAPagar, detallesDto);
         if (resultado != null && resultado.isExito()) {
             JOptionPane.showMessageDialog(this, resultado.getMensaje(), "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-
-            GUISeleccionMetodoEnvio SiguientePantalla = new GUISeleccionMetodoEnvio(this.carrito); // Pasa el carrito
-            SiguientePantalla.setVisible(true);
-
+            nav.navegarPaginaSeleccionEnvio(this);
         } else {
             String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
             JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
         }
 
-//        codigo anterior, no lo borro por si acaso se ocupa luego
-//        if (numTarjeta.isEmpty() || fechaVencimiento.isEmpty() || cvv.isEmpty() || nombre.isEmpty() || correo.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Favor de llenar todos los campos requeridos.", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Pagando...", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
-//        }
-//        GUISeleccionMetodoEnvio SME = new GUISeleccionMetodoEnvio();
-//        SME.setVisible(true);
-//        this.dispose();
     }//GEN-LAST:event_BTNPagarMastercardActionPerformed
 
     private void TxtFldFechaVencimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtFldFechaVencimActionPerformed
@@ -474,8 +449,6 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
         if (fechaVencimiento.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldFechaVencimActionPerformed
 
@@ -484,8 +457,6 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
         if (cvv.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldCVVActionPerformed
 
@@ -494,8 +465,6 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
         if (nombreCompleto.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldNombreCompActionPerformed
 
@@ -504,8 +473,6 @@ public class GUIPagoMastercard extends javax.swing.JFrame {
 
         if (correo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "debes llenar este campo obligatoriamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_TxtFldCorreoActionPerformed
 

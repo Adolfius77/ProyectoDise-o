@@ -4,6 +4,7 @@ import Control.ControlNavegacion;
 import DTOS.DTOPayPal;
 import DTOS.LibroDTO;
 import Infraestructura.IMetodoPago;
+import Negocio.ManejoPagos;
 import Negocio.ResultadoPago;
 import Presentacion.GUICarrito;
 import Negocio.PagoPaypal;
@@ -35,12 +36,12 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         setTitle("Pago con PayPal - Monto: $" + String.format("%.2f", monto));
         setLocationRelativeTo(null);
     }
-    
+
     public GUIPagoPaypal() {
         initComponents();
         configurarNavegacion();
     }
-    
+
     private void configurarNavegacion() {
         final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
@@ -53,9 +54,9 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         if (BtnPerfil != null) {
             BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
         }
-        if (BtnCarrito != null){
+        if (BtnCarrito != null) {
             BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
-        }           
+        }
         if (CMBOpciones != null) {
             CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
         }
@@ -63,7 +64,7 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
 //            BTNPagarPaypal.addActionListener(evt -> navegador.navegarPaginaPagoPaypal(this));
         }
     }
-    
+
     private void manejarAccionOpciones() {
         String seleccion = (String) CMBOpciones.getSelectedItem();
         if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
@@ -336,42 +337,25 @@ public class GUIPagoPaypal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Pagando...", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             ControlNavegacion.getInstase().navegarPaginaSeleccionEnvio(this);
-//            this.dispose();
+            this.dispose();
         }
 
         DTOPayPal detallesDto = new DTOPayPal(correo, contra);
         contra = null;
 
-        IMetodoPago metodoPago = new PagoPaypal();
-        ResultadoPago resultado = null;
+        ControlNavegacion nav = ControlNavegacion.getInstase();
+        ManejoPagos mp = nav.getManejoPagos();
+        ResultadoPago resultado = mp.ejecutarPago(this.montoAPagar, detallesDto);
 
-        try {
-            resultado = metodoPago.procesarPago(this.montoAPagar, detallesDto);
+        if (resultado != null && resultado.isExito()) {
+            JOptionPane.showMessageDialog(this, resultado.getMensaje(), "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            nav.navegarPaginaSeleccionEnvio(this);
 
-            if (resultado != null && resultado.isExito()) {
-
-                JOptionPane.showMessageDialog(this, resultado.getMensaje(), "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
-
-                GUISeleccionMetodoEnvio SiguientePantalla = new GUISeleccionMetodoEnvio(this.carrito);
-                SiguientePantalla.setVisible(true);
-                this.dispose();
-
-            } else {
-//
-//                String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
-//                JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
-
-            }
-        } catch (Exception e) {
-
-            System.err.println("Error al procesar el pago con PayPal: " + e.getMessage());
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al procesar el pago.", "Error Crítico", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String mensajeError = (resultado != null) ? resultado.getMensaje() : "Error desconocido durante el pago.";
+            JOptionPane.showMessageDialog(this, mensajeError, "Pago Fallido", JOptionPane.ERROR_MESSAGE);
         }
 
-//        GUISeleccionMetodoEnvio SME = new GUISeleccionMetodoEnvio();
-//        SME.setVisible(true);
-//        this.dispose();
     }//GEN-LAST:event_BTNPagarPaypalActionPerformed
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed

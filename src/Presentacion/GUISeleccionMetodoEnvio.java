@@ -22,16 +22,17 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
      * Creates new form GUISeleccionMetodoEnvio
      */
     public GUISeleccionMetodoEnvio(List<LibroDTO> carritoRecibido) {
-        this.carrito = carritoRecibido != null ? carritoRecibido : new ArrayList<>(); 
-        setLocationRelativeTo(null); 
+        this.carrito = carritoRecibido != null ? carritoRecibido : new ArrayList<>();
+
     }
-    
+
     public GUISeleccionMetodoEnvio() {
-       initComponents();
-       configurarNavegacion();
+        initComponents();
+        configurarNavegacion();
+        setLocationRelativeTo(null);
     }
-    
-     private void configurarNavegacion() {
+
+    private void configurarNavegacion() {
         final ControlNavegacion navegador = ControlNavegacion.getInstase();
 
         if (BtnInicio != null) {
@@ -43,9 +44,9 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
         if (BtnPerfil != null) {
             BtnPerfil.addActionListener(evt -> navegador.navegarPerfil(this));
         }
-        if (BtnCarrito != null){
+        if (BtnCarrito != null) {
             BtnCarrito.addActionListener(evt -> navegador.navegarCarrito(this));
-        }           
+        }
         if (CMBOpciones != null) {
             CMBOpciones.addActionListener(evt -> manejarAccionOpciones());
         }
@@ -53,7 +54,7 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
 //            BTNPagarPaypal.addActionListener(evt -> navegador.navegarPaginaPagoPaypal(this));
 //        }
     }
-    
+
     private void manejarAccionOpciones() {
         String seleccion = (String) CMBOpciones.getSelectedItem();
         if (seleccion == null || "Opciones".equals(seleccion) || CMBOpciones.getSelectedIndex() == 0) {
@@ -75,7 +76,7 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
         }
         CMBOpciones.setSelectedIndex(0);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,20 +376,20 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-        GUIINICIO inicio = new GUIINICIO();
-        inicio.setVisible(true);
+//        GUIINICIO inicio = new GUIINICIO();
+//        inicio.setVisible(true);
 
     }//GEN-LAST:event_BtnInicioActionPerformed
 
     private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
-        GUIPerfil perfil = new GUIPerfil();
-        perfil.setVisible(true);
+//        GUIPerfil perfil = new GUIPerfil();
+//        perfil.setVisible(true);
 
     }//GEN-LAST:event_BtnPerfilActionPerformed
 
     private void BtnCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoActionPerformed
-        GUICarrito carrito = new GUICarrito(this.carrito);
-        carrito.setVisible(true);
+//        GUICarrito carrito = new GUICarrito(this.carrito);
+//        carrito.setVisible(true);
 
     }//GEN-LAST:event_BtnCarritoActionPerformed
 
@@ -397,6 +398,10 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
     }//GEN-LAST:event_CMBOpcionesActionPerformed
 
     private void checkBoxEstafetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBoxEstafetaMouseClicked
+
+    }//GEN-LAST:event_checkBoxEstafetaMouseClicked
+
+    private void checkBoxEstafetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEstafetaActionPerformed
         int confirmacion = JOptionPane.showConfirmDialog(this,
                 "Ha seleccionado Estafeta. ¿Desea continuar?", "Confirmación",
                 JOptionPane.YES_NO_OPTION);
@@ -406,12 +411,6 @@ public class GUISeleccionMetodoEnvio extends javax.swing.JFrame {
             estafeta.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_checkBoxEstafetaMouseClicked
-
-    private void checkBoxEstafetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEstafetaActionPerformed
-//        GUIEnvioDHL dhl = new GUIEnvioDHL();
-//        dhl.setVisible(true);
-//        this.dispose();
     }//GEN-LAST:event_checkBoxEstafetaActionPerformed
 
     private void checkBoxDHLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkBoxDHLMouseClicked
