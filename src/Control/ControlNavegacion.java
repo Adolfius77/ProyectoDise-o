@@ -33,7 +33,7 @@ public class ControlNavegacion {
     private static ControlNavegacion instancia;
     private ManejoPagos manejoPagos;
 
-    public ControlNavegacion() {
+    private ControlNavegacion() {
         this.carrito = new ArrayList<>();
         this.manejoPagos = new ManejoPagos();
     }
